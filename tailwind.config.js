@@ -60,6 +60,10 @@ module.exports = {
         '900': '900px',
         '2000': '2000px'
       },
+
+      backgroundImage: {
+        'heroImage': "url('./public/images/sport_3.png)",
+      },
     },
   },
   plugins: [

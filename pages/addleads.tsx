@@ -69,7 +69,7 @@ function addlead({}: Props) {
         route_image: routeImage,
         route_video: routeVideo,
       });
-      router.push('/')
+      router.push('/leads')
     } catch (error) {
       alert(error)
     }
@@ -117,6 +117,7 @@ function addlead({}: Props) {
             <input className='form__input' value={routeCrag} onChange={changeRouteCrag} type="text" placeholder='Crag' />
             <input className='form__input' value={routeSector} onChange={changeRouteSector} type="text" placeholder='Sector' />
             <select className='form__input' value={routeClimbType} onChange={changeRouteClimbType} name="climb_type" placeholder='Climbed As:'>
+                <option className='form__input' value="">Please select</option>
                 <option className='form__input' value="redpoint">Redpoint</option>
                 <option className='form__input' value="flash">Flash</option>
                 <option className='form__input' value="onsight">Onsight</option>

@@ -11,3 +11,25 @@
     text-black transition-all placeholder-black focus:border-cursorColor/40 
     focus:text-cursorColor/40 hover:border-cursorColor/40 rounded-lg
 }
+
+.leads__background{
+    position: relative;
+    height: full;
+    background: url("../public/images/sport_3.png") center no-repeat;
+    background-size: cover;
+    z-index: 0;
+}
+
+
+.leads__gradient{
+    width: 100%;
+    z-index: 1;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.4);
+    background-image: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.8) 0,
+        rgba(0, 0, 0, 0) 60%,
+        rgba(0, 0, 0, 0.8) 100%,
+    );
+}
