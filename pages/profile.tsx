@@ -1,10 +1,9 @@
 import React from 'react'
 import Nav from './nav'
-import { selectUser } from '../features/userSlice'
 import { auth } from '../firebase'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
-
+import { selectUser } from '../features/userSlice'
 
 type Props = {}
 

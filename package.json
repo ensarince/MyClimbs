@@ -19,10 +19,12 @@
     "framer-motion": "^7.6.7",
     "next": "13.0.4",
     "next-image-loader": "^2.0.0",
+    "next-redux-wrapper": "^8.0.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "react-social-icons": "^5.15.0",
+    "redux-persist": "^6.0.0",
     "tailwind-scrollbar": "^2.0.1",
     "typescript": "4.9.3"
   },

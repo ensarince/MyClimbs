@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import {store} from "../app/store"
 import { Provider } from 'react-redux'
 import Link from 'next/link'
 import { auth } from '../firebase';
@@ -30,9 +29,10 @@ export default function Home() {
         dispatch(logout())
       }
     })
-
+    
     return unsubscribe;
   }, [dispatch])
+
    
   
   return (

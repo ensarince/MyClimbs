@@ -33,7 +33,7 @@
     "pages/About.tsz",
     "pages/hometsx",
     ".next/types/**/*.ts"
-  ],
+, "features/counter/authSlice.js", "features/counter/authSlice.js"  ],
   "exclude": [
     "node_modules"
   ]

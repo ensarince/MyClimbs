@@ -4,9 +4,9 @@ import React, { useEffect, useState } from 'react'
 import { db } from '../firebase'
 import Nav from './nav'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../features/userSlice'
 import { useRouter } from 'next/router'
 import firebase from 'firebase/compat'
+import { selectUser } from '../features/userSlice'
 
 type Props = {}
 
@@ -30,7 +30,7 @@ function Leads({}: Props) {
                 data: doc.data()
               })))
             }); 
-        }, [user?.uid])   
+        }, [])   
 
         console.log(leads)
 
@@ -53,7 +53,6 @@ function Leads({}: Props) {
           </div>
           </div>
         </Link>
-
 
 	<div className="flex flex-col p-20 md: p-10 sm: p-5">
     <div className="overflow-x-auto shadow-md sm:rounded-lg">
@@ -100,7 +99,7 @@ function Leads({}: Props) {
                                 <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_climb_type}</td>
                             <td className="py-4 px-6 text-sm font-medium right-20 whitespace-nowrap">
                               <Link href={`/leads/${item?.id}`}>
-                                <p routeName = {item.data.route_name} className="text-blue-600 dark:text-blue-500 hover:underline">Details</p>
+                                <p className="text-blue-600 dark:text-blue-500 hover:underline">Details</p>
                               </Link>
                             </td>
                               </tr>

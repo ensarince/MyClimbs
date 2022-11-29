@@ -9,15 +9,12 @@ function SignUpScreen({}: Props) {
   const passwordRef = useRef(null)
   const router = useRouter();
 
-
-
   const signIn = (e) => {
     e.preventDefault();
     auth.signInWithEmailAndPassword(
       emailRef.current.value,
       passwordRef.current.value,
     ).then((authUser) => {
-      console.log(authUser);
       router.push('/')
     })
     .catch((error) => alert(error.message))
