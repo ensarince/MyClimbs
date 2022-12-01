@@ -1,8 +1,9 @@
 import { useRouter } from 'next/router'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import { auth, db } from '../firebase'
-import { selectUser } from '../store/userSlice'
+import { selectUser } from '../features/userSlice'
+import { auth, db, storage } from '../firebase'
+import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from "firebase/storage";
 import Nav from './nav'
 
 type Props = {}
@@ -10,6 +11,8 @@ type Props = {}
 function addlead({}: Props) {
   const user = useSelector(selectUser)
   const router = useRouter()
+  let file: never[] | Blob | ArrayBuffer = [];
+  const [loading, setLoading] = useState(false)
 
   const [routeName, setRouteName] = useState("")
   const [routeGrade, setRouteGrade] = useState("")
@@ -19,8 +22,10 @@ function addlead({}: Props) {
   const [routeClimbType, setRouteClimbType] = useState("")
   const [routeDate, setRouteDate] = useState("")
   const [routeImage, setRouteImage] = useState("")
-  const [routeVideo, setRouteVideo] = useState("")
- 
+/*   const [routeVideo, setRouteVideo] = useState("")
+ */
+  const [progresspercent, setProgresspercent] = useState(0);
+  const [imgUrl, setImgUrl] = useState("");
 
       const changeRouteName = (event) => {
         setRouteName(event.target.value)
@@ -43,38 +48,68 @@ function addlead({}: Props) {
       const changeRouteDate = (event) => {
         setRouteDate(event.target.value)
       }
-      const changeRouteImage = (event) => {
-        setRouteImage(event.target.value)
-      }
-      const changeRouteVideo = (event) => {
+      
+/*       const changeRouteVideo = (event) => {
         setRouteVideo(event.target.value)
       }
+ */
+      const uploadImage = () => {
 
-  const addLead = async (e) => {
+        setLoading(true)
+
+        const storageRef = ref(storage, `/images/${user?.uid}/${file.name}`);
+        const  uploadTask = uploadBytesResumable(storageRef, file);
+        
+         uploadTask.on("state_changed",
+          (snapshot) => {
+            const progress =
+              Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+            setProgresspercent(progress);
+          },
+          (error) => {
+            alert(error);
+          },
+          () => {
+             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+              setImgUrl(downloadURL)
+              console.log(imgUrl)
+            });
+          }
+        );    
+        setLoading(false)
+      }
+
+  const addLead = (e) => {  
     //!
     e.preventDefault();
-    try {
-      db
-      .collection("users")
-      .doc(user?.uid)
-      .collection("leads")
-      .add({
-        route_name: routeName,
-        route_grade: routeGrade,
-        route_country: routeCountry,
-        route_crag: routeCrag,
-        route_sector: routeSector,
-        route_climb_type: routeClimbType,
-        route_date: routeDate,
-        route_image: routeImage,
-        route_video: routeVideo,
-      });
-      router.push('/leads')
-    } catch (error) {
-      alert(error)
-    }
 
-  }
+    uploadImage()
+
+    if(loading){
+      alert("image loading...")
+    }else{
+        try {
+          db
+          .collection("users")
+          .doc(user?.uid)
+          .collection("leads")
+          .add({
+            route_name: routeName,
+            route_grade: routeGrade,
+            route_country: routeCountry,
+            route_crag: routeCrag,
+            route_sector: routeSector,
+            route_climb_type: routeClimbType,
+            route_date: routeDate,
+            route_image: imgUrl,
+    /*         route_video: routeVideo,
+     */      });
+          router.push('/leads')
+        } catch (error) {
+          alert(error)
+        }
+      }
+    }
 
   return (
     <>
@@ -123,9 +158,9 @@ function addlead({}: Props) {
                 <option className='form__input' value="onsight">Onsight</option>
             </select>
             <input className='form__input' onChange={changeRouteDate} value={routeDate} type="date" />
-            <input className='form__input' onChange={changeRouteImage} value={routeImage} type="file" name="leadImage" /* onChange={} */ />
-            <input className='form__input' onChange={changeRouteVideo} value={routeVideo} type="file" name="leadVideo" /* onChange={} */ />
-            <button onClick={addLead} className='relative px-9 py-6 font-sans text-white bg-black/10 border-none hover:bg-coolOrange transition duration-150 active:bg-black rounded-md font-medium cursor-pointer' type='submit'>Submit</button>
+            <input className='form__input' onChange={(e) => (file = e.target.files[0])} value={routeImage} accept="image/*" type="file" name="leadImage"/>
+{/*             <input className='form__input' onChange={changeRouteVideo} value={routeVideo} type="file" name="leadVideo" />
+ */}            <button onClick={addLead} className='relative px-9 py-6 font-sans text-white bg-black/10 border-none hover:bg-coolOrange transition duration-150 active:bg-black rounded-md font-medium cursor-pointer' type='submit'>Submit</button>
         </form>
     </div>
     </>

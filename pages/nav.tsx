@@ -24,7 +24,7 @@ function Nav({}: Props) {
           transition={{
             duration: 1.5,
           }}
-          className='absolute mt-10 left-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="./images/logo_2.png" alt="" />
+          className='absolute mt-10 left-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="https://openailabsprodscus.blob.core.windows.net/private/user-MHYcA2CYrJJ5o5aYjn5DhV4v/generations/generation-tIetw7OPUboYgC06bXsfWPKD/image.webp?st=2022-12-01T08%3A57%3A24Z&se=2022-12-01T10%3A55%3A24Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-01T07%3A11%3A54Z&ske=2022-12-08T07%3A11%3A54Z&sks=b&skv=2021-08-06&sig=vwMkIM4oc8Op1//zoyHHvUK0/snCRrGToLnoRiua/As%3D" alt="" />
           </Link>
             <motion.div 
               initial={{
@@ -69,7 +69,7 @@ function Nav({}: Props) {
             transition={{
               duration: 1.5,
             }}
-              className='absolute mt-10 right-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="./images/logo.png"  alt="" />
+              className='absolute mt-10 right-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="https://openailabsprodscus.blob.core.windows.net/private/user-MHYcA2CYrJJ5o5aYjn5DhV4v/generations/generation-byY2OKg5gvIXYQQeB5OLsyVt/image.webp?st=2022-12-01T08%3A57%3A24Z&se=2022-12-01T10%3A55%3A24Z&sp=r&sv=2021-08-06&sr=b&rscd=inline&rsct=image/webp&skoid=15f0b47b-a152-4599-9e98-9cb4a58269f8&sktid=a48cca56-e6da-484e-a814-9c849652bcb3&skt=2022-12-01T07%3A11%3A54Z&ske=2022-12-08T07%3A11%3A54Z&sks=b&skv=2021-08-06&sig=57rs%2BACeodin4KJEi8jKuscAxbWmV70gFSCYLgBh0q4%3D"  alt="" />
             </Link>
 
         </div>

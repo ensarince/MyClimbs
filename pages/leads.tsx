@@ -32,8 +32,6 @@ function Leads({}: Props) {
             }); 
         }, [])   
 
-        console.log(leads)
-
   return (
     <>
       <Nav />
