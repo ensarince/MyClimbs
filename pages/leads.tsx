@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import firebase from 'firebase/compat'
 import { selectUser } from '../features/userSlice'
+import {useReactTable}  from "@tanstack/react-table"
 
 type Props = {}
 
@@ -35,6 +36,7 @@ function Leads({}: Props) {
   return (
     <>
       <Nav />
+      <div className='bg-darkGray2 h-fit min-h-screen'>
       <Link href={"/addleads"}>
         <div className='flex flex-col justify-center items-center'>
           <h1 className='uppercase text-white text-2xl mb-5'>Sport Climbing</h1>
@@ -45,14 +47,14 @@ function Leads({}: Props) {
                 src="./images/sport_climbing.png" alt="" />
               <div className='absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-200 w-200 rounded-full z-0 '>
                   <div className='flex items-center justify-center h-full'>
-                      <p className='text-xl font-bold text-white opacity-100 '>+ Route to Database</p>
+                      <p className='text-xl font-bold text-black opacity-100 '>+ Route to Database</p>
                   </div> 
               </div>
           </div>
           </div>
         </Link>
 
-	<div className="flex flex-col p-20 md: p-10 sm: p-5">
+	<div className="flex flex-col p-20 md:p-10 sm:p-5">
     <div className="overflow-x-auto shadow-md sm:rounded-lg">
         <div className="inline-block min-w-full align-middle">
             <div className="overflow-hidden ">
@@ -80,14 +82,15 @@ function Leads({}: Props) {
                             <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
                                 Climbed As
                             </th>
-    
+                            <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                                Detail
+                            </th>
                         </tr>
                     </thead>
 
-                    <tbody className="bg-white divide-y divide-gray-200 dark:bg-gray-800 dark:divide-gray-700">
-
+                    <tbody className="bg-white divide-y divide-gray-700 dark:bg-gray-800 dark:divide-gray-700">
                             {leads?.map((item) => (
-                              <tr className='hover:bg-gray-100 dark:hover:bg-gray-200'>
+                              <tr className='hover:bg-gray-600 dark:hover:bg-gray-600'>
                                 <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_name}</td>
                                 <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_grade}</td>
                                 <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_country}</td>
@@ -101,17 +104,18 @@ function Leads({}: Props) {
                               </Link>
                             </td>
                               </tr>
-                              
                             ))}
-
- 
-                        
                       </tbody>
                   </table>
               </div>
           </div>
       </div>
   </div>
+
+      </div>
+      
+
+
     </>
   )
 }

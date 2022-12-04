@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
-    background-color: #111;
-}
-
 .form__input{
     @apply outline-none bg-coolOrange w-1/2 rounded-sm border-b px-6 py-4 border-yt-gray
     text-black transition-all placeholder-black focus:border-cursorColor/40 
@@ -14,17 +10,16 @@
 
 .leads__background{
     position: relative;
-    height: full;
+    height: fit-content;
     background: url("../public/images/sport_3.png") center no-repeat;
     background-size: cover;
     z-index: 0;
 }
 
-
 .leads__gradient{
     width: 100%;
     z-index: 1;
-    height: 100vh;
+    height: fit-content;
     background: rgba(0, 0, 0, 0.4);
     background-image: linear-gradient(
         to top,
@@ -32,4 +27,14 @@
         rgba(0, 0, 0, 0) 60%,
         rgba(0, 0, 0, 0.8) 100%,
     );
+}
+
+.socialLogo{
+    margin: 0 1rem;
+    transition: transform 250ms;
+    display: inline-block;
+}
+
+.socialLogo:hover{
+    transform: translateY(-2px);
 }

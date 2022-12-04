@@ -27,6 +27,9 @@ module.exports = {
         'rockColor': "#D24205",
         'coolGray': "#8C92AC",
         'coolOrange': '#ffa500',
+        'backgroundOpacity': "rgba(128,128,128,0)",
+        'backgroundOpacity2': "rgba(0,0,0,0.5)",
+
       },
       top:{
         '30': '30px',
@@ -44,6 +47,7 @@ module.exports = {
         '300': '300px',
         '500': '500px',
         '650': '650px',
+        '1000': '1000px',
       },
       width: {
         '15': '15px',
