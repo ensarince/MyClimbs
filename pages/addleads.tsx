@@ -27,25 +27,25 @@ function addlead({}: Props) {
   const [loading, setLoading] = useState(false)
   const [imgUrl, setImgUrl] = useState("");
 
-      const changeRouteName = (event) => {
+      const changeRouteName = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteName(event.target.value)
       }
-      const changeRouteGrade = (event) => {
+      const changeRouteGrade = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteGrade(event.target.value)
       }
-      const changeRouteCountry = (event) => {
+      const changeRouteCountry = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteCountry(event.target.value)
       }
-      const changeRouteCrag = (event) => {
+      const changeRouteCrag = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteCrag(event.target.value)
       }
-      const changeRouteSector = (event) => {
+      const changeRouteSector = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteSector(event.target.value)
       }
-      const changeRouteClimbType = (event) => {
+      const changeRouteClimbType = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteClimbType(event.target.value)
       }
-      const changeRouteDate = (event) => {
+      const changeRouteDate = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteDate(event.target.value)
       }
       
@@ -57,7 +57,7 @@ function addlead({}: Props) {
 
       console.log(progresspercent)
 
-      const changeRouteImage = (e) => {
+      const changeRouteImage = (e: { target: { files: (never[] | Blob | ArrayBuffer)[] } }) => {
         setLoading(true)
         file = e.target.files[0]
 
@@ -83,7 +83,7 @@ function addlead({}: Props) {
         );    
       }
 
-  const addLeads = (e) => {  
+  const addLeads = (e: { preventDefault: () => void }) => {  
     //!
     e.preventDefault();
 

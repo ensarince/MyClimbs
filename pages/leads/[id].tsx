@@ -30,8 +30,6 @@ function leads({}: Props) {
                 })
             }, [])   
     
-            console.log(leadData)
-
 
   return (
     <>
@@ -59,7 +57,7 @@ function leads({}: Props) {
 
     <footer className='bg-darkGray2 pt-6 z-10'>
         <div className="flex flex-col text-center text-white flex-1">
-          <div className='flex items-center justify-center mx-6'>
+          <div className='flex items-center justify-center mx-6 mb-6'>
             <SocialIcon  bgColor='#262626' className='socialLogo' fgColor='white' url='https://github.com/ensarince' />
             <SocialIcon  bgColor='#262626' className='socialLogo' fgColor='white' url='https://www.instagram.com/nsrnce/' />
             <SocialIcon  bgColor='#262626' className='socialLogo' fgColor='white' url='https://portfolio-next-bice-psi.vercel.app/' />

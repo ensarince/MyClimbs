@@ -35,6 +35,9 @@ module.exports = {
         '30': '30px',
         '50': '50px',
       },
+      margin:{
+        '4': '4px',
+      },
       height: {
         '15': '15px',
         '20': '20px',

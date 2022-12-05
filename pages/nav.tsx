@@ -23,7 +23,7 @@ function Nav({}: Props) {
           transition={{
             duration: 1.5,
           }}
-          className='absolute mt-10 left-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="./images/logo_2.png" alt="" />
+          className='absolute mt-10 left-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/2SjX5d1/logo-2.png" alt="" />
           </Link>
             <motion.div 
               initial={{
@@ -68,7 +68,7 @@ function Nav({}: Props) {
             transition={{
               duration: 1.5,
             }}
-              className='absolute mt-10 right-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="./images/logo.png"  alt="" />
+              className='absolute mt-10 right-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/Tt6j1rG/logo.png"  alt="" />
             </Link>
 
         </div>

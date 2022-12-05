@@ -17,17 +17,19 @@ function ProfileScreen({}: Props) {
   }
 
   return (
-    <div className='h-screen text-white'>
+    <>
         <Nav />
-        <div className='flex items-center justify-center flex-col w-1/2 ml-auto mt-20 mr-auto max-w-800'>
-        <h1 className='font-medium text-3xl border-b-1 mb-10'>Profile</h1>
-          <img className='h-64 w-64 rounded-sm' src="./images/logo_1.png" alt="" />
-          <div className='flex flex-col items-center justify-center text-white flex-1'>
-            <h2 className='p-10 text-xl'>{user?.email}</h2>
-            <button onClick={() => signOutFunc()} className='text-xl hover:underline cursor-pointer'>Sign out</button>
+      <div className='h-screen text-white bg-gradient-to-t from-violet-500 to-coolRed'>
+          <div className='flex items-center absolute top-1/3 right-0 left-0 justify-center flex-col w-1/2 ml-auto  mr-auto max-w-800'>
+          <h1 className='font-medium text-3xl border-b-1 mb-10'>Profile</h1>
+            <img className='h-64 w-64 rounded-sm' src="./images/logo_1.png" alt="" />
+            <div className='flex flex-col items-center justify-center text-white flex-1'>
+              <h2 className='p-10 text-xl'>{user?.email}</h2>
+              <button onClick={() => signOutFunc()} className='text-xl hover:underline cursor-pointer'>Sign out</button>
+            </div>
           </div>
-        </div>
-    </div>
+      </div>
+    </>
   )
 }
 

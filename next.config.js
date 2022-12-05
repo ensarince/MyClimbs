@@ -7,7 +7,6 @@ const nextConfig = {
     loader: "akamai",
     path: "/",
   },
-  experimental: {appDir: true}
 };
 
 module.exports = nextConfig;
