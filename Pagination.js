@@ -10,7 +10,7 @@ export default function Pagination({
 }) {
 
   return (
-    <div className='absolute right-20'>
+    <div className='flex justify-center items-center mt-6'>
             {
                 currentPage !== 1 &&
                 <a
@@ -18,21 +18,25 @@ export default function Pagination({
                     paginateBack();
                     }}
                     href='#'
-                    className='relative inline-flex items-center px-5 py-2 rounded-md border font-medium text-blue-600 text-xl hover:underline'>
+                    className='px-6 py-2 border border-blue-600 rounded-full 
+                    uppercase text-xs tracking-widest
+                     text-white transition-all hover:bg-slate-500'>
                     <span>Previous </span>
                 </a>
             }
 
             {(totalPosts / 10 > currentPage) &&
-            <a
+            <button
                 onClick={() => {
                 paginateFront();
                 }}
                 href='#'
-                className='relative inline-flex items-center px-5 py-2 rounded-md border font-medium text-blue-600 text-xl hover:underline'
+                className='px-6 py-2 border border-blue-600 rounded-full 
+                uppercase text-xs tracking-widest
+                 text-white transition-all hover:bg-slate-500'
             >
                 <span>Next</span>
-            </a>
+            </button>
             }
 
     </div>

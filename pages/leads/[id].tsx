@@ -5,6 +5,7 @@ import { db } from '../../firebase'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../features/userSlice'
 import { SocialIcon } from 'react-social-icons'
+import { motion } from 'framer-motion'
 
 
 type Props = {
@@ -16,9 +17,15 @@ function leads({}: Props) {
     const { id } = router.query
     const user = useSelector(selectUser)
     const [leadData, setLeadData] = useState([])
+    const [loading, setLoading] = useState(false)
+
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
 
             //getting climb data
             useEffect(() => {
+              setLoading(true);
               db.collection('users')
                 .doc(user?.uid)
                 .collection('leads')
@@ -34,7 +41,14 @@ function leads({}: Props) {
   return (
     <>
     <Nav />
+
     <div className='leads__background'>
+    {loading ? (
+      <div className="loader-container">
+      <div className="spinner"></div>
+    </div>
+    ):
+    (
       <div className='relative h-fit min-h-screen left-0 right-0  bg-backgroundOpacity'>
         <div className='grid grid-cols-2 h-fit min-h-screen justify-center items-center text-gray-100 p-20 bg-backgroundOpacity2'>
 
@@ -47,14 +61,29 @@ function leads({}: Props) {
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
         </div>
 
-          <img 
+          <motion.img 
+          initial={{
+            x: +500,
+            opacity: 0,
+            scale: 0.5
+          }}
+          animate={{
+            x: 0,
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            duration: 1,
+          }}
             className='flex z-10 relative w-650 flex-shrink-0'
             src={leadData?.route_image} alt="" />
         </div>
       </div>
-         <div className='leads__gradient' /> 
-    </div>
-
+         )
+        }
+        <div className='leads__gradient' /> 
+        </div>
+{/*    
     <footer className='bg-darkGray2 pt-6 z-10'>
         <div className="flex flex-col text-center text-white flex-1">
           <div className='flex items-center justify-center mx-6 mb-6'>
@@ -69,7 +98,7 @@ function leads({}: Props) {
           </div>
             <a className="text-whitehite mb-6">© 2022 - MyClimbs</a>
         </div>
-      </footer>
+      </footer> */}
     </>
   )
 }
