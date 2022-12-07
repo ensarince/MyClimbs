@@ -36,15 +36,18 @@ export default function Home() {
    
   
   return (
-    <div className='scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-cursorColor'>
+    <div className='scrollbar scrollbar-thumb-darkGray2/50 scrollbar-gray-300 overflow-y-scroll h-screen'>
 
         <Head>
         <title>My Climbs</title>
         </Head>
           <>
+          <div>
              <Link href={!user ? "/login" : "/"} passHref legacyBehavior>
                {!user ? <LoginScreen /> : <HomeScreen/>} 
             </Link> 
+
+          </div>
 
           </>  
 

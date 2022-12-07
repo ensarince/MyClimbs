@@ -13,14 +13,14 @@ export default function Home({}: Props) {
       <Nav />
       <div className='relative flex items-center justify-center h-screen overflow-hidden'>
       <video  autoPlay  loop muted 
-      className="absolute z-10 min-w-full min-h-full">
+      className="absolute z-8 min-w-full min-h-full flex-shrink-0">
          <source src="./images/climbs_2.mp4" type="video/mp4" />
       </video>
       </div>
 
-      <footer className='bg-darkGray2 z-10 pt-6'>
+      <footer className='bg-darkGray2 z-10 py-4 h-24'>
         <div className="flex flex-col text-center text-white flex-1">
-          <div className='flex items-center justify-center mx-6 mb-2'>
+          <div className='flex items-center justify-center'>
             <SocialIcon  bgColor='#262626' className='socialLogo' fgColor='white' url='https://github.com/ensarince' />
             <SocialIcon  bgColor='#262626' className='socialLogo' fgColor='white' url='https://www.instagram.com/nsrnce/' />
             <SocialIcon  bgColor='#262626' className='socialLogo' fgColor='white' url='https://portfolio-next-bice-psi.vercel.app/' />
@@ -30,7 +30,7 @@ export default function Home({}: Props) {
                 </svg>
             </a>
           </div>
-            <a className="text-whitehite mb-6">© 2022 - MyClimbs</a>
+            <a className="text-whitehite">© 2022 - MyClimbs</a>
         </div>
       </footer>
     </>

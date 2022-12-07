@@ -6,15 +6,16 @@ module.exports = {
   ],
   theme: {
     screens: {
-      'sm': '300px',
+      'xs': '200px',
+      'sm': '400px',
       // => @media (min-width: 576px) { ... }
 
-      'md': '500px',
+      'md': '576px',
       // => @media (min-width: 960px) { ... }
 
-      'lg': '900px',
+      'lg': '960px',
       // => @media (min-width: 1440px) { ... }
-      'xl': '1200px'
+      'xl': '1440px'
     },
     extend: {
       colors: {

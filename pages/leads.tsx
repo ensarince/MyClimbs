@@ -80,10 +80,10 @@ function Leads({}: Props) {
               }
   return (
     <>
+      <div className='bg-darkGray2 h-screen min-h-screen scrollbar scrollbar-thumb-darkGray2/50 scrollbar-gray-300 overflow-y-scroll '>
       <Nav />
-      <div className='bg-darkGray2 h-fit min-h-screen'>
       <Link href={"/addleads"}>
-        <div className='flex flex-col justify-center items-center'>
+        <div className='flex flex-col justify-center items-center '>
           <h1 className='uppercase text-white text-2xl mb-5'>Sport Climbing</h1>
           <div className='group relative flex cursor-pointer'>
               <motion.img 

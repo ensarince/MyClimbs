@@ -6,7 +6,7 @@ type Props = {}
 
 function Nav({}: Props) {
   return (
-    <div className='sticky top-0 flex h-25 p-12 items-center justify-center overflow-hidden bg-darkGray2 z-10 '>
+    <div className='sticky top-0 flex h-20 p-12 items-center justify-center overflow-hidden bg-darkGray2 z-10'>
           <div className='flex justify-evenly items-center'>
           <Link href={"/"}>
           <motion.img 
@@ -23,9 +23,10 @@ function Nav({}: Props) {
           transition={{
             duration: 1.5,
           }}
-          className='absolute mt-10 left-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/2SjX5d1/logo-2.png" alt="" />
+          className='absolute mt-5 left-5 top-0 items-center xl:w-16 xl:h-16 lg:w-14 lg:h-14 md:h-12 md:w-12 sm:w-12 sm:h-12 xs:w-10 xs:h-10 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/2SjX5d1/logo-2.png" alt="" />
           </Link>
             <motion.div 
+            className='flex xl:flex-row lg:flex-row md:flex-col sm:flex-col xs-flex-col'
               initial={{
               y: -500,
               opacity: 0,
@@ -41,16 +42,16 @@ function Nav({}: Props) {
             }}
             >
               <Link href={"/leads"}>
-                <p className='uppercase hidden md:inline-flex  hover:text-gray-300 duration:500ms cursor-pointer text- text-gray-400 hover:'>Sport Climbing</p>
+                <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18 md:inline-flex hover:text-gray-300 duration:500ms cursor-pointer text-md text-gray-400'>Sport Climbing</p>
               </Link>
               <Link href={'/boulders'}>
-               <p className='uppercase hidden ml-20 md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Bouldering</p>
+               <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18  md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Bouldering</p>
               </Link>
               <Link href={'/traditionals'}>
-                <p className='uppercase hidden ml-20 md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Trad Climbing</p>
+                <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18 md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Trad Climbing</p>
               </Link>
               <Link href={'/walls'}>
-                <p className='uppercase hidden ml-20 md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Multipitch</p>
+                <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18 md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Multipitch</p>
               </Link>
             </motion.div>
             <Link href={"/profile"}>
@@ -68,7 +69,7 @@ function Nav({}: Props) {
             transition={{
               duration: 1.5,
             }}
-              className='absolute mt-10 right-5 top-0 items-center w-16 h-16 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/Tt6j1rG/logo.png"  alt="" />
+              className='absolute mt-5 right-5 top-0 items-center  xl:w-16 xl:h-16 lg:w-14 lg:h-14 md:h-12 md:w-12 sm:w-12 sm:h-12 xs:w-10 xs:h-10 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/Tt6j1rG/logo.png"  alt="" />
             </Link>
 
         </div>
