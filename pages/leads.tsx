@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import firebase from 'firebase/compat'
 import { selectUser } from '../features/userSlice'
 import {useReactTable}  from "@tanstack/react-table"
-import Pagination from "../Pagination"
+import Pagination from "../components/Pagination"
 
 type Props = {}
 

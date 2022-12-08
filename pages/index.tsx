@@ -5,9 +5,9 @@ import Link from 'next/link'
 import { auth } from '../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import {login, logout, selectUser} from "../features/userSlice"
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import React from 'react'
-import LoginScreen from './login'
+import LoginScreen from './landing'
 import HomeScreen from "./home"
 
 export default function Home() {

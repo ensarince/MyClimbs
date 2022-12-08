@@ -1,38 +1,48 @@
-import React, { useState } from 'react'
-import SignupScreen from './signup'
+import React,{useRef} from 'react'
+import { auth, db } from '../firebase'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 type Props = {}
 
-function LoginScreen({}: Props) {
-  const [signIn, setSignIn] = useState(false)
+function SignUpScreen({}: Props) {
+  const emailRef = useRef(null)
+  const passwordRef = useRef(null)
+  const passwordConfirmRef = useRef()
+  const router = useRouter();
+
+  const signIn = (e) => {
+    e.preventDefault();
+    auth.signInWithEmailAndPassword(
+      emailRef.current.value,
+      passwordRef.current.value,
+    ).then((authUser) => {
+      router.push('/')
+    })
+    .catch((error) => alert(error.message))
+  }
   return (
-    <div className='flex justify-center h-screen bg-gradient-to-t from-violet-500 to-fuchsia-500'>
-      <img className='absolute mt-32 w-32 h-32 object-contain p-5' src="./images/logo.png"  alt="" />
-        <div className='absolute top-1/3 z-1 text-black p-20 ml-auto mr-auto text-center left-0 right-0'>
+      <form className='flex flex-col justify-center items-center'>
+            <input className='outline-none bg-slate-200 rounded-sm border-b px-14 py-5 border-yt-gray
+                text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
+                focus:text-black hover:border-darkGray2/40 mb-3' ref={emailRef} placeholder='Email' type="email" />
+            <input  className='outline-none bg-slate-200 rounded-sm border-b px-14 py-5 border-yt-gray
+                text-gray-400 transition-all placeholder-gray-500 font-semibold focus:border-darkGray2
+                focus:text-black hover:border-darkGray2/40' ref={passwordRef} placeholder='Password' type="password" />
+            <button className='px-14 mt-5 py-5 font-sans font-semibold text-white bg-cursorColor hover:bg-fuchsia-500 hover:border-black border-none cursor-pointer' type='submit' onClick={signIn}>Login</button>
+            <h4 className='text-left mt-6 text-lg'><span className='text-gray-100 font-normal'>New to MyClimbs? </span>
+              <Link href={'/signup'}>
+                <span className='hover:underline hover:text-white cursor-pointer text-white font-semibold'>Sign In</span>
+              </Link>
+            </h4> 
+            <h3 className='text-left mt-3 text-md'><span className='text-gray-100 font-normal'> </span>
+              <Link href={'/forgotPassword'}>
+                <span className='hover:underline hover:text-white cursor-pointer text-white font-semibold'>Forgot Password?</span>
+              </Link>
+            </h3> 
+      </form>
 
-          <div className='absolute flex flex-col top-1/4 z-1 backdrop:p-20 ml-auto mr-auto left-0 right-0 items-center'>
-            {
-              signIn ? (
-                <SignupScreen />
-                ) : 
-                (
-                  <>
-                  <h1 className='text-2xl mb-10 font-semibold text-white  '>Add your ascents.</h1>
-                  <h2 className='text-xl mb-10 font-semibold text-white '>Always keep track of your climbs.</h2>
-                  <h3 className='text-md font-semibold text-white '>Ready to see your logbook? Register now with your email.</h3>
-
-                  <div className="m-20">
-                    <form action="">
-                      <button className='px-9 py-6 font-sans hover:bg-fuchsia-500 hover:border-black text-white bg-cursorColor border-none font-medium cursor-pointer' onClick={() => setSignIn(true)}>SIGN IN</button>
-                    </form>
-                  </div>
-                </>
-              )
-            }
-          </div>
-            </div>
-    </div>
   )
 }
 
-export default LoginScreen
+export default SignUpScreen
