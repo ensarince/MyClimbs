@@ -67,13 +67,12 @@ function Addlead({}: Props) {
         setRouteNote(event.target.value)
       }
       
-      const changeRouteImage = (e) => {
+      const changeRouteImage = (event: { target: { files: any | Blob | ArrayBuffer } }) => {
 
         setLoading(true)
-        file = e.target.files[0]
+        file = event.target.files[0]
 
         const storageRef = ref(storage, `/images/${user?.uid}/${file.name}`);
-        //!fix name, did for deploy
         const  uploadTask = uploadBytesResumable(storageRef, file);
 
         setLoading(true)
