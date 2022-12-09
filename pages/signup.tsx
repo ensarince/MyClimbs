@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
 type Props = {}
 
-function register({}: Props) {
+function Register({}: Props) {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
     const passwordConfirmRef = useRef(null)
@@ -83,4 +83,4 @@ function register({}: Props) {
   )
 }
 
-export default register
+export default Register
