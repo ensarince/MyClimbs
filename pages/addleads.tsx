@@ -9,6 +9,7 @@ import Nav from './nav'
 type Props = {}
 
 function addlead({}: Props) {
+
   const user = useSelector(selectUser)
   const router = useRouter()
   let file: never[] | Blob | ArrayBuffer = [];
@@ -21,11 +22,23 @@ function addlead({}: Props) {
   const [routeClimbType, setRouteClimbType] = useState("")
   const [routeDate, setRouteDate] = useState("")
   const [routeImage, setRouteImage] = useState("")
-/*   const [routeVideo, setRouteVideo] = useState("")
- */
   const [progresspercent, setProgresspercent] = useState(0);
   const [loading, setLoading] = useState(false)
   const [imgUrl, setImgUrl] = useState("");
+
+
+        //!get local storage
+      let uid: string | null = null;
+      if (typeof window !== "undefined") {
+        uid = window.localStorage.getItem("user")
+      }
+      //!redirect if not logged in
+      useEffect(() => {
+        // checks if the user is authenticated
+        !uid
+        ? router.push("/")
+        : router.push("/addleads");
+        }, []);  
 
       const changeRouteName = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteName(event.target.value)
@@ -49,14 +62,6 @@ function addlead({}: Props) {
         setRouteDate(event.target.value)
       }
       
-/*       const changeRouteVideo = (event) => {
-        setRouteVideo(event.target.value)
-      }
- */
-
-
-      console.log(progresspercent)
-
       const changeRouteImage = (e: { target: { files: (never[] | Blob | ArrayBuffer)[] } }) => {
         setLoading(true)
         file = e.target.files[0]
@@ -86,7 +91,6 @@ function addlead({}: Props) {
   const addLeads = (e: { preventDefault: () => void }) => {  
     //!
     e.preventDefault();
-
       try {
         db
         .collection("users")

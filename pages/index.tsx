@@ -24,6 +24,8 @@ export default function Home() {
           uid: userAuth.uid,
           email: userAuth.email,
         }))
+        //!set localstorage
+        window.localStorage.setItem("user", userAuth.uid)
       }else{
         //logged eout
         dispatch(logout())
@@ -33,7 +35,7 @@ export default function Home() {
     return unsubscribe;
   }, [dispatch])
 
-   
+
   
   return (
     <div className='scrollbar scrollbar-thumb-darkGray2/50 scrollbar-gray-300 overflow-y-scroll h-screen'>
@@ -48,9 +50,7 @@ export default function Home() {
             </Link> 
 
           </div>
-
           </>  
-
     </div>
   )
 }

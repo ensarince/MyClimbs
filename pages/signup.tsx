@@ -1,7 +1,9 @@
-import React,{useRef, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import { auth, db } from '../firebase'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { useSelector } from 'react-redux'
+import { selectUser } from '../features/userSlice'
 type Props = {}
 
 function register({}: Props) {
@@ -10,6 +12,20 @@ function register({}: Props) {
     const passwordConfirmRef = useRef(null)
     const router = useRouter();
     const [loading, setloading] = useState(false)
+    const user = useSelector(selectUser)
+    
+    
+    let uid: string | null = null;
+    if (typeof window !== "undefined") {
+       uid = window.localStorage.getItem("user")
+    }
+    //!redirect if not logged in
+    useEffect(() => {
+      // checks if the user is authenticated
+      !uid
+      ? router.push("/signup")
+      : router.push("/");
+      }, []);
 
   const register = async(e) => {
     //prevent refresh of the page when button clicked
@@ -53,7 +69,9 @@ function register({}: Props) {
                         text-gray-400 transition-all placeholder-gray-500 font-semibold focus:border-darkGray2
                         focus:text-black hover:border-darkGray2/40' ref={passwordConfirmRef} placeholder='Confirm Password' type="password" />
                     <button disabled={loading} className='px-14 mt-5 py-5 font-sans font-semibold text-white bg-cursorColor hover:bg-fuchsia-500 hover:border-black border-none cursor-pointer' type='submit' onClick={register}>Sign in</button>
-
+                    <Link href={'/'}>
+                        <button className='text-xl hover:underline cursor-pointer mt-3 text-white'>Cancel</button>
+                    </Link>
                 </form>
             </div>
 

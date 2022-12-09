@@ -10,6 +10,7 @@ import { selectUser } from '../features/userSlice'
 import {useReactTable}  from "@tanstack/react-table"
 import Pagination from "../components/Pagination"
 
+
 type Props = {}
 
 function Leads({}: Props) {
@@ -31,6 +32,21 @@ function Leads({}: Props) {
   const [search, setSearch] = useState(false)
   const [searchText, setSearchText] = useState("")
 
+  
+  //!get local storage
+  let uid: string | null = null;
+  if (typeof window !== "undefined") {
+    uid = window.localStorage.getItem("user")
+  }
+  //!redirect if not logged in
+  useEffect(() => {
+    // checks if the user is authenticated
+    !uid
+    ? router.push("/")
+    : router.push("/leads");
+    }, []);
+
+  
   //for loading animation
   setTimeout(() => {
     setLoading(false);
@@ -40,7 +56,7 @@ function Leads({}: Props) {
         useEffect(() => {
           setLoading(true);
           db.collection('users')
-            .doc(user?.uid)
+            .doc(uid || user?.uid)
             .collection('leads')
             .get()
             .then((querySnapshot) => {
@@ -80,11 +96,11 @@ function Leads({}: Props) {
               }
   return (
     <>
-      <div className='bg-darkGray2 h-screen min-h-screen scrollbar scrollbar-thumb-darkGray2/50 scrollbar-gray-300 overflow-y-scroll '>
+      <div className='bg-darkGray2 h-screen min-h-screen scrollbar scrollbar-thumb-darkGray2/50 scrollbar-gray-300 overflow-y-scroll'>
       <Nav />
       <Link href={"/addleads"}>
         <div className='flex flex-col justify-center items-center '>
-          <h1 className='uppercase text-white text-2xl mb-5'>Sport Climbing</h1>
+          <h1 className='uppercase text-white text-2xl my-5'>Sport Climbing</h1>
           <div className='group relative flex cursor-pointer'>
               <motion.img 
                 className="overflow-hidden rounded-full border-gray-500 object-cover h-200 w-200
@@ -201,3 +217,9 @@ function Leads({}: Props) {
 }
 
 export default Leads
+
+/* Leads.getInitialProps = async (props: any) => {
+  console.info('##### Congratulations! You are authorized! ######', props);
+  return {};
+};
+ */

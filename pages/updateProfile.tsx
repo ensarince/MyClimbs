@@ -1,4 +1,4 @@
-import React,{useRef, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import { auth, db } from '../firebase'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -15,6 +15,19 @@ function updateProfile({}: Props) {
     const router = useRouter();
     const [loading, setloading] = useState(false)
     const user = useSelector(selectUser)
+
+    let uid: string | null = null;
+    if (typeof window !== "undefined") {
+       uid = window.localStorage.getItem("user")
+    }
+    //!redirect if not logged in
+    useEffect(() => {
+      // checks if the user is authenticated
+      !uid
+      ? router.push("/")
+      : router.push("/updateProfile");
+      }, []);
+
     
 
     const updateProfile = async(e) => {
@@ -62,7 +75,7 @@ function updateProfile({}: Props) {
                         text-gray-400 transition-all placeholder-gray-500 font-semibold focus:border-darkGray2
                         focus:text-black hover:border-darkGray2/40' ref={passwordConfirmRef} placeholder='confirm password' type="password" />
                     <button disabled={loading} className='px-14 mt-5 py-5 font-sans font-semibold text-white bg-cursorColor hover:bg-fuchsia-500 hover:border-black border-none cursor-pointer' type='submit' onClick={updateProfile}>Update</button>
-                    <Link href={'/landing'}>
+                    <Link href={!user ? '/' : '/updateProfile'}>
                         <button className='text-xl hover:underline cursor-pointer mt-3 text-white'>Cancel</button>
                     </Link>
                 </form>

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
-import Nav from '../nav'
-import { db } from '../../firebase'
 import { useSelector } from 'react-redux'
-import { selectUser } from '../../features/userSlice'
 import { SocialIcon } from 'react-social-icons'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import Nav from '../../nav'
+import { db } from '../../../firebase'
+import { selectUser, userSlice } from '../../../features/userSlice'
 
 
 type Props = {}
@@ -49,26 +49,7 @@ function leads({}: Props) {
         })
     }, [])   
 
-      const handleDelete = (e) =>{
-        e.preventDefault();
-        try {
-          var shouldDelete = confirm("Are you you sure?")
-          if (shouldDelete) {
-            db
-            .collection("users")
-            .doc(uid)
-            .collection("leads")
-            .doc(id)
-            .delete()
-            .then(()=>{alert("successfully deleted! ")})
-            router.push('/leads')
-          }else {
-
-          }
-        } catch (error) {
-          alert(error)
-      }
-    }
+    
 
   return (
     <>
@@ -94,9 +75,6 @@ function leads({}: Props) {
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
           
           <div className='flex justify-start items-start my-10'>
-              <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
-                  uppercase text-sm tracking-widest
-                  text-white transition-all mr-5 hover:bg-slate-500' onClick={handleDelete}>Delete</button>
               <Link href={`/leads/edit/${id}`}>
                 <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
                   uppercase text-sm tracking-widest hover:bg-slate-500

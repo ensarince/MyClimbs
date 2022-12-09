@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Nav from './nav'
 import { auth } from '../firebase'
 import { useSelector } from 'react-redux'
@@ -6,9 +6,25 @@ import { useRouter } from 'next/router'
 import { selectUser } from '../features/userSlice'
 import Link from 'next/link'
 
+
 type Props = {}
 
-function ProfileScreen({}: Props) {
+export default function ProfileScreen({}: Props) {
+
+  //!get local storage
+  let uid: string | null = null;
+  if (typeof window !== "undefined") {
+    uid = window.localStorage.getItem("user")
+  }
+  //!redirect if not logged in
+  useEffect(() => {
+    // checks if the user is authenticated
+    !uid
+    ? router.push("/")
+    : router.push("/profile");
+    }, []);
+
+
   const user = useSelector(selectUser)
   const router = useRouter();
 
@@ -16,6 +32,7 @@ function ProfileScreen({}: Props) {
     try {      
      await auth.signOut()
       router.push('/')
+      window.localStorage.setItem("user", "")
     } catch (error) {
       alert(error)
     }
@@ -41,4 +58,3 @@ function ProfileScreen({}: Props) {
   )
 }
 
-export default ProfileScreen

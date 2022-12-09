@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {motion} from "framer-motion"
 import Link from 'next/link';
+import router from 'next/router';
 
 type Props = {}
 
 function Nav({}: Props) {
+
+    //!redirect if not logged in
+    useEffect(() => {
+
+      router.push("/")
+
+      }, []);
+
   return (
     <div className='sticky top-0 flex h-20 p-12 items-center justify-center overflow-hidden bg-darkGray2 z-10'>
           <div className='flex justify-evenly items-center'>

@@ -1,7 +1,9 @@
-import React,{useRef, useState} from 'react'
+import React,{useEffect, useRef, useState} from 'react'
 import { auth, db } from '../firebase'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import { selectUser } from '../features/userSlice'
+import { useSelector } from 'react-redux'
 type Props = {}
 
 function forgotPassword({}: Props) {
@@ -9,6 +11,21 @@ function forgotPassword({}: Props) {
     const passwordRef = useRef(null)
     const [loading, setLoading] = useState(false)
     const router = useRouter();
+    const user = useSelector(selectUser)
+
+    //!get local storage
+    let uid: string | null = null;
+    if (typeof window !== "undefined") {
+        uid = window.localStorage.getItem("user")
+        console.log(uid)
+    }
+        //!redirect if not logged in
+        useEffect(() => {
+            // checks if the user is authenticated
+            !uid
+            ? router.push("/")
+            : router.push("/forgotPassword");
+            }, []);
 
     const resetPassword = async() => {
         try {
@@ -31,7 +48,7 @@ function forgotPassword({}: Props) {
                         text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
                         focus:text-black hover:border-darkGray2/40 mb-3' ref={emailRef} placeholder='Email' type="email" />
                     <button disabled={loading} className='px-14 mt-5 py-5 font-sans font-semibold text-white bg-cursorColor hover:bg-fuchsia-500 hover:border-black border-none cursor-pointer' type='submit' onClick={resetPassword}>Reset Password</button>
-                    <Link href={'/landing'}>
+                    <Link href={!user ? '/' : '/forgotPassword'}>
                         <button className='text-xl hover:underline cursor-pointer mt-5 text-white'>Login</button>
                     </Link>
                 </form>
