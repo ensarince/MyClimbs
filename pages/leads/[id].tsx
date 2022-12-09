@@ -11,7 +11,7 @@ import Link from 'next/link'
 
 type Props = {}
 
-function leads({}: Props) {
+function Leads({}: Props) {
     const router = useRouter()
     const { id } = router.query
     const user = useSelector(selectUser)
@@ -135,4 +135,4 @@ function leads({}: Props) {
   )
 }
 
-export default leads
+export default Leads

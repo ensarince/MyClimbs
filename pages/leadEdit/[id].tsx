@@ -11,7 +11,7 @@ import { selectUser, userSlice } from '../../features/userSlice'
 
 type Props = {}
 
-function leadEdit({}: Props) {
+function LeadEdit({}: Props) {
     const router = useRouter()
     const { id } = router.query
     const user = useSelector(selectUser)
@@ -112,4 +112,4 @@ function leadEdit({}: Props) {
   )
 }
 
-export default leadEdit
+export default LeadEdit

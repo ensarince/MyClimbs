@@ -8,7 +8,7 @@ import Nav from './nav'
 
 type Props = {}
 
-function addlead({}: Props) {
+function Addlead({}: Props) {
 
   const user = useSelector(selectUser)
   const router = useRouter()
@@ -178,4 +178,4 @@ function addlead({}: Props) {
   )
 }
 
-export default addlead
+export default Addlead

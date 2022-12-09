@@ -6,7 +6,7 @@ import { selectUser } from '../features/userSlice'
 import { useSelector } from 'react-redux'
 type Props = {}
 
-function forgotPassword({}: Props) {
+function ForgotPassword({}: Props) {
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
     const [loading, setLoading] = useState(false)
@@ -57,4 +57,4 @@ function forgotPassword({}: Props) {
   )
 }
 
-export default forgotPassword
+export default ForgotPassword
