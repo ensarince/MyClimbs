@@ -12,7 +12,7 @@ function Addlead({}: Props) {
 
   const user = useSelector(selectUser)
   const router = useRouter()
-  let file: never[] | Blob | ArrayBuffer = [];
+  let file: any | Blob | ArrayBuffer = [];
 
   const [routeName, setRouteName] = useState("")
   const [routeGrade, setRouteGrade] = useState("")
@@ -67,11 +67,13 @@ function Addlead({}: Props) {
         setRouteNote(event.target.value)
       }
       
-      const changeRouteImage = (e: { target: { files: (Blob | ArrayBuffer)[] } }) => {
+      const changeRouteImage = (e) => {
+
         setLoading(true)
         file = e.target.files[0]
 
-        const storageRef = ref(storage, `/images/${user?.uid}/${file}`);
+        const storageRef = ref(storage, `/images/${user?.uid}/${file.name}`);
+        //!fix name, did for deploy
         const  uploadTask = uploadBytesResumable(storageRef, file);
 
         setLoading(true)
