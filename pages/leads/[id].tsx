@@ -92,7 +92,7 @@ function Leads({}: Props) {
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_country}</p>
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_crag}</p>
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
-          <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>"{leadData?.route_notes}"</p>
+          <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>{leadData?.route_notes}</p>
           
           <div className='flex justify-start items-start my-10'>
               <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
