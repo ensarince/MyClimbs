@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux'
 
 type Props = {}
 
-function updateProfile({}: Props) {
+function UpdateProfile({}: Props) {
 
     const emailRef = useRef(null)
     const passwordRef = useRef(null)
@@ -89,4 +89,4 @@ function updateProfile({}: Props) {
   )
 }
 
-export default updateProfile
+export default UpdateProfile
