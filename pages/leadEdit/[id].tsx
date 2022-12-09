@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux'
 import { SocialIcon } from 'react-social-icons'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
-import Nav from '../../nav'
-import { db } from '../../../firebase'
-import { selectUser, userSlice } from '../../../features/userSlice'
+import Nav from '../nav'
+import { db } from '../../firebase'
+import { selectUser, userSlice } from '../../features/userSlice'
 
 
 type Props = {}
 
-function leads({}: Props) {
+function leadEdit({}: Props) {
     const router = useRouter()
     const { id } = router.query
     const user = useSelector(selectUser)
@@ -112,4 +112,4 @@ function leads({}: Props) {
   )
 }
 
-export default leads
+export default leadEdit

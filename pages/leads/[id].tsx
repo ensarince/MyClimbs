@@ -92,12 +92,13 @@ function leads({}: Props) {
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_country}</p>
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_crag}</p>
           <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
+          <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>"{leadData?.route_notes}"</p>
           
           <div className='flex justify-start items-start my-10'>
               <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
                   uppercase text-sm tracking-widest
                   text-white transition-all mr-5 hover:bg-slate-500' onClick={handleDelete}>Delete</button>
-              <Link href={`/leads/edit/${id}`}>
+              <Link href={`/leadEdit/${id}`}>
                 <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
                   uppercase text-sm tracking-widest hover:bg-slate-500
                   text-white transition-all'>Edit</button>

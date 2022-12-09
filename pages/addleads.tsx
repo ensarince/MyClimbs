@@ -21,6 +21,7 @@ function addlead({}: Props) {
   const [routeSector, setRouteSector] = useState("")
   const [routeClimbType, setRouteClimbType] = useState("")
   const [routeDate, setRouteDate] = useState("")
+  const [routeNote, setRouteNote] = useState("")
   const [routeImage, setRouteImage] = useState("")
   const [progresspercent, setProgresspercent] = useState(0);
   const [loading, setLoading] = useState(false)
@@ -60,6 +61,10 @@ function addlead({}: Props) {
       }
       const changeRouteDate = (event: { target: { value: React.SetStateAction<string> } }) => {
         setRouteDate(event.target.value)
+      }
+
+      const changeRouteNote = (event: { target: { value: React.SetStateAction<string> } }) => {
+        setRouteNote(event.target.value)
       }
       
       const changeRouteImage = (e: { target: { files: (never[] | Blob | ArrayBuffer)[] } }) => {
@@ -105,8 +110,8 @@ function addlead({}: Props) {
           route_climb_type: routeClimbType,
           route_date: routeDate,
           route_image: imgUrl,
-  /*         route_video: routeVideo,
-   */      });
+          route_notes: routeNote
+        });
         router.push('/leads')
       } catch (error) {
         alert(error)
@@ -161,6 +166,7 @@ function addlead({}: Props) {
             </select>
             <input className='form__input' onChange={changeRouteDate} value={routeDate} type="date" />
             <input className='form__input' onChange={changeRouteImage} value={routeImage} accept="image/*" type="file" name="leadImage"/>
+            <textarea className='form__input' name="routeNote" placeholder='Add your note' onChange={changeRouteNote}/>
            {loading ? (
             <p className='relative px-9 py-6 font-sans text-white bg-black/10 border-none hover:bg-coolOrange transition duration-150 active:bg-black rounded-md font-medium'>Loading...{progresspercent}</p>
            ):

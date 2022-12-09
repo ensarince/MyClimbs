@@ -178,7 +178,7 @@ function Leads({}: Props) {
 
                 <tbody className="bg-white divide-y divide-gray-700 dark:bg-gray-800 dark:divide-gray-700">
                         {currentPosts?.map((item)=> (
-                          <tr className='hover:bg-gray-600 dark:hover:bg-gray-600'>
+                          <tr key={item.data.route_name} className='hover:bg-gray-600 dark:hover:bg-gray-600'>
                             <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_name}</td>
                             <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_grade}</td>
                             <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_country}</td>
