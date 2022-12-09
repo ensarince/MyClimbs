@@ -67,7 +67,7 @@ function Addlead({}: Props) {
         setRouteNote(event.target.value)
       }
       
-      const changeRouteImage = (e: { target: { files: (never[] | Blob | ArrayBuffer)[] } }) => {
+      const changeRouteImage = (e: { target: { files: (Blob | ArrayBuffer)[] } }) => {
         setLoading(true)
         file = e.target.files[0]
 
