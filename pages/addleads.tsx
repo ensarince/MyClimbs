@@ -71,7 +71,7 @@ function Addlead({}: Props) {
         setLoading(true)
         file = e.target.files[0]
 
-        const storageRef = ref(storage, `/images/${user?.uid}/${file.name}`);
+        const storageRef = ref(storage, `/images/${user?.uid}/${file}`);
         const  uploadTask = uploadBytesResumable(storageRef, file);
 
         setLoading(true)
