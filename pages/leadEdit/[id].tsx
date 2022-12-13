@@ -13,7 +13,7 @@ type Props = {}
 
 function LeadEdit({}: Props) {
     const router = useRouter()
-    const { id } = router.query
+    const { id }: any = router.query
     const user = useSelector(selectUser)
     const [leadData, setLeadData] = useState([])
     const [loading, setLoading] = useState(false)
@@ -44,7 +44,7 @@ function LeadEdit({}: Props) {
         .doc(id)
         .get()
         .then((querySnapshot) => {
-          var data = querySnapshot.data();
+          var data: any = querySnapshot.data();
           setLeadData(data);
         })
     }, [])   
