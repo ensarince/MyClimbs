@@ -19,7 +19,7 @@ function LeadEdit({}: Props) {
     const [loading, setLoading] = useState(false)
     
     
-  let uid: string | null = null;
+  let uid: string | any = null;
   if (typeof window !== "undefined") {
      uid = window.localStorage.getItem("user")
   }
