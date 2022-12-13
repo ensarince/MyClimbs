@@ -28,7 +28,7 @@ function Leads({}: Props) {
   const [loading, setLoading] = useState(false)
 
   //data storing and search
-  const [leads, setLeads] = useState([])
+  const [leads, setLeads] = useState<any>([]);
   const [search, setSearch] = useState(false)
   const [searchText, setSearchText] = useState("")
 
@@ -77,20 +77,21 @@ function Leads({}: Props) {
 
               //filtering the data array according the search text
               function handleSearchText(){
-               const filtered = leads.filter(item => {
+               const filtered = leads.filter((item:any) => {
                 return item.data.route_name.toLowerCase().includes(searchText.toLowerCase())
                })
                   setLeads(filtered)
               }
       
               //setting up the search text with given input
-              function handleFilterTextChange(e){
+              function handleFilterTextChange(e: React.SetStateAction<string>){
                   setSearchText(e)
               }
       
               //resets the search
               function handleReset(){
-                  document.getElementById("searchBar").value = "";
+                  const searchDocument: any = document.getElementById("searchBar")
+                  searchDocument.value = "";
                   setSearchText("")
                   setSearch(!search)
               }
@@ -177,7 +178,7 @@ function Leads({}: Props) {
                 </thead>
 
                 <tbody className="bg-white divide-y divide-gray-700 dark:bg-gray-800 dark:divide-gray-700">
-                        {currentPosts?.map((item)=> (
+                        {currentPosts?.map((item: any)=> (
                           <tr key={item.data.route_name} className='hover:bg-gray-600 dark:hover:bg-gray-600'>
                             <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_name}</td>
                             <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_grade}</td>
