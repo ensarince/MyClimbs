@@ -75,7 +75,7 @@ function UpdateProfile({}: Props) {
                         text-gray-400 transition-all placeholder-gray-500 font-semibold focus:border-darkGray2
                         focus:text-black hover:border-darkGray2/40' ref={passwordConfirmRef} placeholder='confirm password' type="password" />
                     <button disabled={loading} className='px-14 mt-5 py-5 font-sans font-semibold text-white bg-cursorColor hover:bg-fuchsia-500 hover:border-black border-none cursor-pointer' type='submit' onClick={updateProfile}>Update</button>
-                    <Link href={!user ? '/' : '/updateProfile'}>
+                    <Link href={!user ? '/updateProfile' : '/'}>
                         <button className='text-xl hover:underline cursor-pointer mt-3 text-white'>Cancel</button>
                     </Link>
                 </form>

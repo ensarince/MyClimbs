@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux'
 type Props = {}
 
 function ForgotPassword({}: Props) {
-    const emailRef = useRef(null)
-    const passwordRef = useRef(null)
+    const emailRef = useRef<any>(null);
+    const passwordRef = useRef<any>(null);
     const [loading, setLoading] = useState(false)
     const router = useRouter();
     const user = useSelector(selectUser)
@@ -23,8 +23,8 @@ function ForgotPassword({}: Props) {
         useEffect(() => {
             // checks if the user is authenticated
             !uid
-            ? router.push("/")
-            : router.push("/forgotPassword");
+            ? router.push("/forgotPassword")
+            : router.push("/");
             }, []);
 
     const resetPassword = async() => {
