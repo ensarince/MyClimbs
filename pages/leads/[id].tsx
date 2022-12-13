@@ -98,7 +98,7 @@ function Leads({}: Props) {
               <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
                   uppercase text-sm tracking-widest
                   text-white transition-all mr-5 hover:bg-slate-500' onClick={handleDelete}>Delete</button>
-              <Link href={`/leadEdit/${id}`}>
+              <Link href={`/leads/${id}/edit`}>
                 <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
                   uppercase text-sm tracking-widest hover:bg-slate-500
                   text-white transition-all'>Edit</button>
