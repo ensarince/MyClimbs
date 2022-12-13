@@ -13,13 +13,13 @@ type Props = {}
 
 function Leads({}: Props) {
     const router = useRouter()
-    const { id } = router.query
+    const { id }: any = router.query
     const user = useSelector(selectUser)
-    const [leadData, setLeadData] = useState([])
+    const [leadData, setLeadData] = useState<any>([])
     const [loading, setLoading] = useState(false)
     
     
-  let uid: string | null = null;
+  let uid: string | any = null;
   if (typeof window !== "undefined") {
      uid = window.localStorage.getItem("user")
   }
@@ -49,7 +49,7 @@ function Leads({}: Props) {
         })
     }, [])   
 
-      const handleDelete = (e) =>{
+      const handleDelete = (e: { preventDefault: () => void }) =>{
         e.preventDefault();
         try {
           var shouldDelete = confirm("Are you you sure?")

@@ -15,7 +15,7 @@ function LeadEdit({}: Props) {
     const router = useRouter()
     const { id }: any = router.query
     const user = useSelector(selectUser)
-    const [leadData, setLeadData] = useState([])
+    const [leadData, setLeadData] = useState<any>([])
     const [loading, setLoading] = useState(false)
     
     

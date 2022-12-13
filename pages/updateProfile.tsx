@@ -9,9 +9,9 @@ type Props = {}
 
 function UpdateProfile({}: Props) {
 
-    const emailRef = useRef(null)
-    const passwordRef = useRef(null)
-    const passwordConfirmRef = useRef(null)
+    const emailRef = useRef<any>(null);
+    const passwordRef = useRef<any>(null);
+    const passwordConfirmRef = useRef<any>(null);
     const router = useRouter();
     const [loading, setloading] = useState(false)
     const user = useSelector(selectUser)
@@ -30,7 +30,7 @@ function UpdateProfile({}: Props) {
 
     
 
-    const updateProfile = async(e) => {
+    const updateProfile = async(e: { preventDefault: () => void }) => {
     //prevent refresh of the page when button clicked
     e.preventDefault();
 
