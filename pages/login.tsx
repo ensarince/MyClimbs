@@ -6,12 +6,12 @@ import Link from 'next/link'
 type Props = {}
 
 function SignUpScreen({}: Props) {
-  const emailRef = useRef(null)
-  const passwordRef = useRef(null)
+  const emailRef = useRef<any>(null);
+  const passwordRef = useRef<any>(null);
   const passwordConfirmRef = useRef()
   const router = useRouter();
 
-  const signIn = (e) => {
+  const signIn = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     auth.signInWithEmailAndPassword(
       emailRef.current.value,

@@ -7,9 +7,9 @@ import { selectUser } from '../features/userSlice'
 type Props = {}
 
 function Register({}: Props) {
-    const emailRef = useRef(null)
-    const passwordRef = useRef(null)
-    const passwordConfirmRef = useRef(null)
+    const emailRef = useRef<any>(null);
+    const passwordRef = useRef<any>(null);
+    const passwordConfirmRef = useRef<any>(null);
     const router = useRouter();
     const [loading, setloading] = useState(false)
     const user = useSelector(selectUser)
@@ -27,7 +27,7 @@ function Register({}: Props) {
       : router.push("/");
       }, []);
 
-  const register = async(e) => {
+  const register = async(e: { preventDefault: () => void }) => {
     //prevent refresh of the page when button clicked
     e.preventDefault();
 
