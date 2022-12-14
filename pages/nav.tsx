@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect,useState } from 'react'
 import {motion} from "framer-motion"
 import Link from 'next/link';
 import router from 'next/router';
@@ -6,6 +6,8 @@ import router from 'next/router';
 type Props = {}
 
 function Nav({}: Props) {
+  
+  const [navbar, setNavbar] = useState(false);
 
     //!redirect if not logged in
     useEffect(() => {
@@ -14,75 +16,98 @@ function Nav({}: Props) {
 
       }, []);
 
-  return (
-    <div className='sticky top-0 flex h-20 p-12 items-center justify-center overflow-hidden bg-darkGray2 z-10'>
-          <div className='flex justify-evenly items-center'>
-          <Link href={"/"}>
-          <motion.img 
-          initial={{
-            x: -500,
-            opacity: 0,
-            scale: 0.5
-          }}
-          animate={{
-            x: 0,
-            opacity: 1,
-            scale: 1,
-          }}
-          transition={{
-            duration: 1.5,
-          }}
-          className='absolute mt-5 left-5 top-0 items-center xl:w-16 xl:h-16 lg:w-14 lg:h-14 md:h-12 md:w-12 sm:w-12 sm:h-12 xs:w-10 xs:h-10 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/2SjX5d1/logo-2.png" alt="" />
-          </Link>
-            <motion.div 
-            className='flex xl:flex-row lg:flex-row md:flex-col sm:flex-col xs-flex-col'
-              initial={{
-              y: -500,
-              opacity: 0,
-              scale: 0.5
-            }}
-            animate={{
-              y: 0,
-              opacity: 1,
-              scale: 1,
-            }}
-            transition={{
-              duration: 1.5,
-            }}
+  return (  
+    <>
+    <nav className="w-full bg-darkGray2 z-10 sticky top-0">
+        <div className="justify-between px-4 mx-auto lg:max-w-7xl md:items-center md:flex md:px-8">
+          <div>
+            <div className="flex items-center justify-between py-3 md:py-5 md:block">
+              <a href="/">
+                <h2 className="text-2xl sm:text-xl text-white font-bold">MyClimbs</h2>
+              </a>
+              <div className="md:hidden">
+                <button
+                  className="p-2 text-gray-700 rounded-md outline-none focus:border-gray-400 focus:border"
+                  onClick={() => setNavbar(!navbar)}
+                >
+                  {navbar ? (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6 text-white"
+                      viewBox="0 0 20 20"
+                      fill="currentColor"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                  ) : (
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="w-6 h-6 text-white"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M4 6h16M4 12h16M4 18h16"
+                      />
+                    </svg>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div
+              className={`flex-1 justify-self-center pb-3 mt-8 md:block md:pb-0 md:mt-0 ${
+                navbar ? 'block' : 'hidden'
+              }`}
             >
-              <Link href={"/leads"}>
-                <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18 md:inline-flex hover:text-gray-300 duration:500ms cursor-pointer text-md text-gray-400'>Sport Climbing</p>
-              </Link>
-              <Link href={'/boulders'}>
-               <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18  md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Bouldering</p>
-              </Link>
-              <Link href={'/traditionals'}>
-                <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18 md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Trad Climbing</p>
-              </Link>
-              <Link href={'/walls'}>
-                <p className='uppercase hidden ml-12 md:ml-10 lg:ml-14 xl:ml-18 md:inline-flex cursor-pointer  hover:text-gray-300 text-md text-gray-400'>Multipitch</p>
-              </Link>
-            </motion.div>
-            <Link href={"/profile"}>
-            <motion.img 
-              initial={{
-              x: +500,
-              opacity: 0,
-              scale: 0.5
-            }}
-            animate={{
-              x: 0,
-              opacity: 1,
-              scale: 1,
-            }}
-            transition={{
-              duration: 1.5,
-            }}
-              className='absolute mt-5 right-5 top-0 items-center  xl:w-16 xl:h-16 lg:w-14 lg:h-14 md:h-12 md:w-12 sm:w-12 sm:h-12 xs:w-10 xs:h-10 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/Tt6j1rG/logo.png"  alt="" />
-            </Link>
-
+              <ul className="items-center justify-center space-y-8 md:flex md:space-x-6 md:space-y-0 uppercase">
+                <li className="hover:text-gray-300 text-md text-gray-400">
+                  <Link href="/leads">
+                    <p>
+                    Sport Climbing
+                    </p>
+                  </Link>
+                </li>
+                <li className="hover:text-gray-300 text-md text-gray-400">
+                  <Link href="/boulders">
+                  <p>
+                    Bouldering
+                    </p>
+                  </Link>
+                </li>
+                <li className="over:text-gray-300 text-md text-gray-400">
+                  <Link href="/traditionals">
+                  <p>
+                    Traditional
+                    </p>
+                  </Link>
+                </li>
+                <li className="over:text-gray-300 text-md text-gray-400">
+                  <Link href="/walls">
+                  <p>
+                    Multipitch
+                    </p>                
+                  </Link>
+                </li>
+                <Link href={"/profile"}>
+                  <img className='absolute mt-2 right-5 top-0 items-center  xl:w-14 xl:h-14 lg:w-14 lg:h-14 md:h-12 md:w-12 sm:w-12 sm:h-12 xs:w-10 xs:h-10 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/Tt6j1rG/logo.png"  alt="" />
+                </Link>
+              </ul>
+            </div>
+          </div>
         </div>
-    </div>
+      </nav>
+      </>
+
   )
 }
 
