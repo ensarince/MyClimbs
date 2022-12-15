@@ -122,9 +122,9 @@ function Addlead({}: Props) {
   return (
     <>
     <Nav />
-    <div className='h-screen mr-auto ml-auto bg-rockColor'>
-        <form className='flex flex-col space-y-2 w-fit  mx-auto sm:w-3/4 sm:pr-5 overflow-hidden xl:w-full md:w-full  items-center p-20' action="">
-            <h1 className='text-3xl text-white p-5 border-none bg-black/10 rounded-xl mb-10'>Add a Route</h1>
+    <div className='h-fit mr-auto ml-auto bg-coolRed'>
+        <form className='flex flex-col space-y-2 w-fit mx-auto xl:w-full lg:w-full md:w-full sm:w-full xs:w-full overflow-hidden items-center xl:p-20 lg:p-20 md:p-10 sm:p-8 xs:p-5' action="">
+            <h1 className='xl:text-3xl lg:text-3xl md:text-2xl sm:text-2xl xs:text-2xl text-white xl:p-5 lg:p-5 md:p-2 sm:p-2 xs:p-0 border-none bg-black/10 rounded-xl xl:mb-10 lg:mb-10 md:mb-8 sm:mb-5 xs:mb-3'>Add a Route</h1>
             <input className='form__input' type="text" value={routeName} onChange={changeRouteName} placeholder='Route Name' />
             <select className='form__input' value={routeGrade} onChange={changeRouteGrade} placeholder='Grade'>
                 <option className='form__input' value="none">Please Select</option>

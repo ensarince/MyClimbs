@@ -158,9 +158,22 @@ function EditLeads({}: Props) {
     ):
     (
       <div className='relative h-fit min-h-screen left-0 right-0  bg-backgroundOpacity'>
-        <div className='grid grid-cols-2 h-fit min-h-screen justify-center items-center text-gray-100 p-20 bg-backgroundOpacity2'>
+        <div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xl:gap-10 lg:gap-10 md:gap-5 sm:gap-5 h-fit min-h-screen justify-center items-center text-gray-100 p-20 bg-backgroundOpacity2'>
 
-        <div className='bg-backgroundOpacity flex flex-col mr-10'>
+        <div className='group relative flex cursor-pointer items-center justify-center opacity-80 xl:mb-0 lg:mb-0 md:mb-0 sm:mb-0 xs:mb-5'>
+          <img id='imageValue' className='overflow-hidden flex object-cover relative w-650 ilter group-hover:grayscale transition duration-300 ease-in-out' 
+            /*//! to be corrected */
+            src={imgUrl || "https://firebasestorage.googleapis.com/v0/b/my-climbs.appspot.com/o/images%2FeeULazRUwkhY58GuErDCisytCdh2%2FCH9ZtRQWgAA_tz_.jpg?alt=media&token=433d8653-6735-4771-8509-cbf984a8dfb"} alt="" />
+          <div className='absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-20 rounded-full z-0 '>
+            <div className='flex items-center justify-center h-full'>
+              <input className='outline-none bg-slate-100 opacity-100 rounded-sm border-b px-6 py-5 border-yt-gray
+              text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
+              focus:text-black hover:border-darkGray2/40 mb-3' onChange={changeRouteImage} value={routeImage} accept="image/*" type="file" name="leadImage"/>
+            </div>
+          </div>
+        </div>
+
+        <div className='bg-backgroundOpacity flex flex-col'>
           <input className='outline-none bg-slate-100 opacity-70 hover:opacity-100 focus:opacity-100 rounded-sm border-b px-12 py-5 border-yt-gray
                         text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
                         focus:text-black hover:border-darkGray2/40 mb-3'type="text" value={routeName} onChange={changeRouteName} placeholder={leadData?.route_name} />
@@ -221,20 +234,7 @@ function EditLeads({}: Props) {
           
         </div>
 
-        <div className='group relative flex cursor-pointer items-center justify-center opacity-80'>
-          <img id='imageValue' className='overflow-hidden flex object-cover relative w-650 ilter group-hover:grayscale transition duration-300 ease-in-out' 
-            /*//! to be corrected */
-            src={imgUrl || "https://firebasestorage.googleapis.com/v0/b/my-climbs.appspot.com/o/images%2FeeULazRUwkhY58GuErDCisytCdh2%2FCH9ZtRQWgAA_tz_.jpg?alt=media&token=433d8653-6735-4771-8509-cbf984a8dfb"} alt="" />
-          <div className='absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-20 rounded-full z-0 '>
-            <div className='flex items-center justify-center h-full'>
-              <input className='outline-none bg-slate-100 opacity-100 rounded-sm border-b px-6 py-5 border-yt-gray
-              text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
-              focus:text-black hover:border-darkGray2/40 mb-3' onChange={changeRouteImage} value={routeImage} accept="image/*" type="file" name="leadImage"/>
-            </div>
-          </div>
-        </div>
-
-          <div className='flex justify-center items-center my-10'>
+          <div className='flex justify-center items-center'>
             {
               loading ? (
                 <p 
@@ -253,7 +253,7 @@ function EditLeads({}: Props) {
               )
             }
           </div>
-        
+
         </div>
       </div>
          )

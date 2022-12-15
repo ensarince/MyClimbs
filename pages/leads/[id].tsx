@@ -83,30 +83,8 @@ function Leads({}: Props) {
     ):
     (
       <div className='relative h-fit min-h-screen left-0 right-0  bg-backgroundOpacity'>
-        <div className='grid grid-cols-2 h-fit min-h-screen justify-center items-center text-gray-100 p-20 bg-backgroundOpacity2'>
-
-        <div className='bg-backgroundOpacity flex flex-col'>
-          <h1 className='text-4xl text-gray-100 hover:underline mb-5 uppercase bg-backgroundOpacity'>{leadData?.route_name}</h1>
-          <p className='text-3xl bg-backgroundOpacity mb-5'>{leadData?.route_grade}</p>
-          <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_climb_type}</p>
-          <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_country}</p>
-          <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_crag}</p>
-          <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
-          <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>{leadData?.route_notes}</p>
-          
-          <div className='flex justify-start items-start my-10'>
-              <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
-                  uppercase text-sm tracking-widest
-                  text-white transition-all mr-5 hover:bg-slate-500' onClick={handleDelete}>Delete</button>
-              <Link href={`/leads/${id}/edit`}>
-                <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
-                  uppercase text-sm tracking-widest hover:bg-slate-500
-                  text-white transition-all'>Edit</button>
-              </Link>
-          </div>
-
-        </div>
-
+        <div className='grid xl:grid-cols-2 h-fit min-h-screen justify-center items-center text-gray-100 p-20 bg-backgroundOpacity2
+        lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xl:gap-10 lg:gap-10 md:gap-5 sm:gap-5'>
           <motion.img 
           initial={{
             x: +500,
@@ -121,9 +99,29 @@ function Leads({}: Props) {
           transition={{
             duration: 1,
           }}
-            className='flex z-10 relative w-650 flex-shrink-0'
+            className='flex z-10 relative w-650 object-cover'
             src={leadData?.route_image} alt="" />
 
+          <div className='bg-backgroundOpacity flex flex-col xl:mt-0 lg:mt-0 md:mt-0 sm:mt-0 xs:mt-10'>
+            <h1 className='text-4xl text-gray-100 hover:underline mb-5 uppercase bg-backgroundOpacity'>{leadData?.route_name}</h1>
+            <p className='text-3xl bg-backgroundOpacity mb-5'>{leadData?.route_grade}</p>
+            <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_climb_type}</p>
+            <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_country}</p>
+            <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_crag}</p>
+            <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
+            <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>{leadData?.route_notes}</p>
+            
+            <div className='flex justify-start items-start my-10'>
+                <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
+                    uppercase text-sm tracking-widest
+                    text-white transition-all mr-5 hover:bg-slate-500' onClick={handleDelete}>Delete</button>
+                <Link href={`/leads/${id}/edit`}>
+                  <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
+                    uppercase text-sm tracking-widest hover:bg-slate-500
+                    text-white transition-all'>Edit</button>
+                </Link>
+            </div>
+          </div>
         </div>
       </div>
          )

@@ -124,89 +124,91 @@ function Leads({}: Props) {
        ):
        (
       <>
-        <div className='flex ml-10 mt-10'>
+      <div className='xl: p-10 lg:p-10 md:p-10 sm:p-5 xs:p-5'>
+        <div className='flex xl:flex-row lg:flex-row md:flex-row sm:flex-row xs:flex-col'>
                 <input
                 className='outline-none bg-slate-400/10 rounded-sm border-b px-6 py-2 border-yt-gray
                 text-white transition-all placeholder-gray-500 focus:border-coolOrange
-                focus:text-white hover:border-darkGray2/40 mr-5'
+                focus:text-white hover:border-darkGray2/40 xl:mr-5 lg:mr-5 md:mr-5 sm:mr-5 xs:mr-1'
                 id='searchBar'       
                 type="text"
                 value={searchText}
                 placeholder="Enter a route name"
                 onChange = {e => handleFilterTextChange(e.target.value)}/>
                <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
-                  uppercase text-xs tracking-widest
-                  text-white transition-all mr-5 hover:bg-slate-500
+                  uppercase text-xs tracking-widest 
+                  text-white transition-all hover:bg-slate-500 xl:mt-0 lg:mt-0 md:mt-0 sm:mt-0 xs:mt-3 xl:mb-0 lg:mb-0 md:mb-0 sm:mb-0 xs:mb-3
               }' onClick={() => handleSearchText()}>Search</button>
                         <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
                   uppercase text-xs tracking-widest hover:bg-slate-500
                   text-white transition-all ' onClick={() => handleReset()}>Reset</button>
-            </div>
+        </div>
 
-<div className="flex flex-col p-20 md:p-10 sm:p-5">
-<div className="overflow-x-auto shadow-md sm:rounded-lg">
-    <div className="inline-block min-w-full align-middle">
-        <div className="overflow-hidden ">
-            <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
-                <thead className="bg-gray-100 dark:bg-gray-700">
-                    <tr>
-                        <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Route Name
-                        </th>
-                        <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Grade
-                        </th>
-                        <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Country
-                        </th>
-                        <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Crag
-                        </th>
-                        <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Grade
-                        </th>
-                        <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Date Ascended
-                        </th>
-                        <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Climbed As
-                        </th>
-                        <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
-                            Detail
-                        </th>
-                    </tr>
-                </thead>
+      <div className="flex flex-col mt-5">
+  <div className="overflow-x-auto shadow-md sm:rounded-lg">
+      <div className="inline-block min-w-full align-middle">
+          <div className="overflow-hidden ">
+              <table className="min-w-full divide-y divide-gray-200 table-fixed dark:divide-gray-700">
+                  <thead className="bg-gray-100 dark:bg-gray-700">
+                      <tr>
+                          <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Detail
+                          </th>
+                          <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Route Name
+                          </th>
+                          <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Grade
+                          </th>
+                          <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Country
+                          </th>
+                          <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Crag
+                          </th>
+                          <th scope="col" className="py-3 px-6  md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Grade
+                          </th>
+                          <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Date Ascended
+                          </th>
+                          <th scope="col" className="py-3 px-6 md:py-2 sm:px-3 text-xs font-medium tracking-wider text-left text-gray-700 uppercase dark:text-gray-400">
+                              Climbed As
+                          </th>
+                      </tr>
+                  </thead>
 
-                <tbody className="bg-white divide-y divide-gray-700 dark:bg-gray-800 dark:divide-gray-700">
-                        {currentPosts?.map((item: any)=> (
-                          <tr key={item.data.route_name} className='hover:bg-gray-600 dark:hover:bg-gray-600'>
-                            <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_name}</td>
-                            <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_grade}</td>
-                            <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_country}</td>
-                            <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_crag}</td>
-                            <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_grade}</td>
-                            <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_date}</td>
-                            <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_climb_type}</td>
-                        <td className="py-4 px-6 text-sm font-medium right-20 whitespace-nowrap">
-                          <Link href={`/leads/${item?.id}`}>
-                            <p className="text-blue-600 dark:text-blue-500 hover:underline">Details</p>
-                          </Link>
-                        </td>
-                          </tr>
-                        ))}
-                  </tbody>
-              </table>
-                        {leads.length > 10 &&
-                                <Pagination
-                                postsPerPage={postsPerPage}
-                                totalPosts={leads.length}
-                                paginateBack={paginateBack}
-                                paginateFront={paginateFront}
-                                currentPage={currentPage}
-                              />
-                        }
-                </div>
-            </div>
+                  <tbody className="bg-white divide-y divide-gray-700 dark:bg-gray-800 dark:divide-gray-700">
+                          {currentPosts?.map((item: any)=> (
+                            <tr key={item.data.route_name} className='hover:bg-gray-600 dark:hover:bg-gray-600'>
+                              <td className="py-4 px-6 text-sm font-medium right-20 whitespace-nowrap">
+                                <Link href={`/leads/${item?.id}`}>
+                                  <p className="text-blue-600 dark:text-blue-500 hover:underline">See Details</p>
+                                </Link>
+                              </td>
+                              <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_name}</td>
+                              <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_grade}</td>
+                              <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_country}</td>
+                              <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_crag}</td>
+                              <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_grade}</td>
+                              <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_date}</td>
+                              <td className="py-4 px-6 md:py-2 sm:px-3 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">{item.data.route_climb_type}</td>
+                            </tr>
+                          ))}
+                    </tbody>
+                </table>
+                          {leads.length > 10 &&
+                                  <Pagination
+                                  postsPerPage={postsPerPage}
+                                  totalPosts={leads.length}
+                                  paginateBack={paginateBack}
+                                  paginateFront={paginateFront}
+                                  currentPage={currentPage}
+                                />
+                          }
+                  </div>
+              </div>
+          </div>
         </div>
       </div>
       </>

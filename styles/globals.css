@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .form__input{
-    @apply outline-none bg-coolOrange w-1/2 rounded-sm border-b px-6 py-4 border-yt-gray
-    text-black transition-all placeholder-black focus:border-cursorColor/40 
-    focus:text-cursorColor/40 hover:border-cursorColor/40 rounded-lg
+    @apply outline-none bg-darkGray/70 w-1/2 rounded-md border-b px-6 py-4 border-yt-gray
+    text-slate-100/70 transition-all placeholder-black focus:border-cursorColor/40 
+    focus:text-slate-100 hover:border-cursorColor/40
 }
 
 .leads__background{

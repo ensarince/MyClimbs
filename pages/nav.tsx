@@ -84,22 +84,29 @@ function Nav({}: Props) {
                     </p>
                   </Link>
                 </li>
-                <li className="over:text-gray-300 text-md text-gray-400">
+                <li className="hover:text-gray-300 text-md text-gray-400">
                   <Link href="/traditionals">
                   <p>
                     Traditional
                     </p>
                   </Link>
                 </li>
-                <li className="over:text-gray-300 text-md text-gray-400">
+                <li className="hover:text-gray-300 text-md text-gray-400">
                   <Link href="/walls">
                   <p>
                     Multipitch
                     </p>                
                   </Link>
                 </li>
+                <li className="hover:text-gray-300 text-md text-gray-400 xl:invisible lg:invisible md:invisible sm:visible xs:visible">
+                  <Link href="/profile">
+                  <p>
+                    Profile
+                    </p>                
+                  </Link>
+                </li>
                 <Link href={"/profile"}>
-                  <img className='absolute mt-2 right-5 top-0 items-center  xl:w-14 xl:h-14 lg:w-14 lg:h-14 md:h-12 md:w-12 sm:w-12 sm:h-12 xs:w-10 xs:h-10 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/Tt6j1rG/logo.png"  alt="" />
+                  <img className='lg:visible xl:visible md:visible sm:invisible absolute mt-2 right-5 top-0 xl:right-5 lg:right-5 md:right-5 xs:invisible items-center  xl:w-14 xl:h-14 lg:w-14 lg:h-14 md:h-12 md:w-12 sm:w-12 sm:h-12 xs:w-10 xs:h-10 object-contain p-1 bg-white rounded-sm' src="https://i.ibb.co/Tt6j1rG/logo.png"  alt="" />
                 </Link>
               </ul>
             </div>
