@@ -104,10 +104,12 @@ function Leads({}: Props) {
           <h1 className='uppercase text-white text-2xl my-5'>Sport Climbing</h1>
           <div className='group relative flex cursor-pointer'>
               <motion.img 
-                className="overflow-hidden rounded-full border-gray-500 object-cover h-200 w-200
+                className="overflow-hidden rounded-full border-gray-500 object-cover xl:h-200 lg:h-200 md:h-200 sm:h-150 xs:h-120 
+                xl:w-200 lg:w-200 md:w-200 sm:w-150 xs:w-120
                 filter group-hover:grayscale transition duration-300 ease-in-out"
                 src="./images/sport_climbing.png" alt="" />
-              <div className='absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-200 w-200 rounded-full z-0 '>
+              <div className='absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white xl:h-200 lg:h-200 md:h-200 sm:h-150 xs:h-120 
+                xl:w-200 lg:w-200 md:w-200 sm:w-150 xs:w-120 rounded-full z-0 '>
                   <div className='flex items-center justify-center h-full'>
                       <p className='text-xl font-bold text-black opacity-100 '>+ Route to Database</p>
                   </div> 

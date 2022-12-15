@@ -23,7 +23,7 @@ function Nav({}: Props) {
           <div>
             <div className="flex items-center justify-between py-3 md:py-5 md:block">
               <Link href="/">
-                <h2 className="text-2xl sm:text-xl text-white font-bold">MyClimbs</h2>
+                <h2 className="xl:text-2xl lg:text-2xl md:tex-2xl sm:text-xl xs:text-xl text-white font-bold">MyClimbs</h2>
               </Link>
               <div className="md:hidden">
                 <button

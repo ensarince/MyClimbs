@@ -12,9 +12,9 @@ export default function Home({}: Props) {
     <>
       <Nav />
       <div className='relative flex items-center justify-center h-screen overflow-hidden'>
-      <video  autoPlay  loop muted 
-      className="absolute z-8 min-w-full min-h-full flex-shrink-0 object-cover">
-         <source src="./images/climbs_2.mp4" type="video/mp4" />
+      <video  autoPlay loop muted 
+      className="absolute z-8 min-w-full min-h-full object-cover">
+         <source src="./images/climbs_1.mp4" type="video/mp4" />
       </video>
       </div>
 

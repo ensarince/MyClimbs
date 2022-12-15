@@ -3,8 +3,8 @@
 @tailwind utilities;
 
 .form__input{
-    @apply outline-none bg-darkGray/70 w-1/2 rounded-md border-b px-6 py-4 border-yt-gray
-    text-slate-100/70 transition-all placeholder-black focus:border-cursorColor/40 
+    @apply outline-none object-cover bg-darkGray/70 xl:w-1/2 lg:w-1/2 md:w-1/2 sm:w-full xs:w-full rounded-md px-2 py-4 border-yt-gray
+    text-slate-100/70 transition-all placeholder-slate-100/40 focus:border-cursorColor/40 
     focus:text-slate-100 hover:border-cursorColor/40
 }
 
