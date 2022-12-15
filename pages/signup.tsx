@@ -48,9 +48,9 @@ function Register({}: Props) {
 
   return (
 
-    <div className='flex justify-center h-screen bg-gradient-to-t from-violet-500 to-fuchsia-500'>
-    <img className='absolute mt-32 w-32 h-32 object-contain p-5' src="./images/logo.png"  alt="" />
-      <div className='absolute top-1/3 z-1 text-black p-20 ml-auto mr-auto text-center left-0 right-0'>
+    <div className='flex justify-center bg-gradient-to-t h-screen from-violet-500 to-fuchsia-500 overflow-hidden'>
+    <img className='absolute mt-28 w-32 h-32 object-contain p-5' src="./images/logo.png"  alt="" />
+      <div className='absolute top-1/4 z-1 text-black p-20 ml-auto mr-auto text-center left-0 right-0'>
 
         <div className='absolute flex flex-col top-1 z-1 backdrop:p-20 ml-auto mr-auto left-0 right-0 items-center'>
         
