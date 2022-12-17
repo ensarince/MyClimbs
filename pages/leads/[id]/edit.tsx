@@ -227,7 +227,8 @@ function EditLeads({}: Props) {
                         focus:text-black hover:border-darkGray2/40 mb-3' value={routeSector} onChange={changeRouteSector} placeholder={leadData?.route_sector} />
            <input className='outline-none bg-slate-100 opacity-70 hover:opacity-100 focus:opacity-100 rounded-sm border-b px-12 py-5 border-yt-gray
                         text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
-                        focus:text-black hover:border-darkGray2/40 mb-3'onChange={changeRouteDate} value={routeDate} placeholder={leadData?.route_date} />
+                        focus:text-black hover:border-darkGray2/40 mb-3'onChange={changeRouteDate} value={routeDate} 
+                        placeholder={leadData?.route_date} type="date" />
            <textarea className='outline-none bg-slate-100 opacity-70 hover:opacity-100 focus:opacity-100 rounded-sm border-b px-12 py-5 border-yt-gray
                         text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
                         focus:text-black hover:border-darkGray2/40 mb-3'onChange={changeRouteNote} value={routeNote} placeholder={leadData?.route_notes} />

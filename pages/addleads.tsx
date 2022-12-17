@@ -119,12 +119,20 @@ function Addlead({}: Props) {
     }
   }
 
+  if(imgUrl === ""){
+   const input2:HTMLElement | null = document.getElementById("FILE_UPLOAD")
+   input2!.style.display = "none"
+  }else{
+    const input1:any = document.getElementById("FILE_UPLOADED")
+    input1!.style.display = "block"
+  }
+
   return (
     <>
     <Nav />
     <div className='h-full mr-auto ml-auto bg-coolRed'>
         <form className='flex flex-col space-y-2 w-full overflow-hidden items-center xl:p-20 lg:p-20 md:p-10 sm:p-8 xs:p-5' action="">
-            <h1 className='xl:text-3xl lg:text-3xl md:text-2xl sm:text-2xl xs:text-2xl text-white xl:p-5 lg:p-5 md:p-2 sm:p-2 xs:p-0 
+            <h1 id='h1' className='xl:text-3xl lg:text-3xl md:text-2xl sm:text-2xl xs:text-2xl text-white xl:p-5 lg:p-5 md:p-2 sm:p-2 xs:p-0 
                           border-none bg-black/10 rounded-xl xl:mb-10 lg:mb-10 md:mb-8 sm:mb-5 xs:mb-3'>Add a Route</h1>
             <input className='form__input' type="text" value={routeName} onChange={changeRouteName} placeholder='Route Name' />
             <select className='form__input' value={routeGrade} onChange={changeRouteGrade} placeholder='Grade'>
@@ -167,7 +175,12 @@ function Addlead({}: Props) {
                 <option className='form__input' value="onsight">Onsight</option>
             </select>
             <input className='form__input' onChange={changeRouteDate} value={routeDate} type="date" />
-            <input className='form__input' onChange={changeRouteImage} value={routeImage} accept="image/*" type="file" name="leadImage"/>
+            
+
+                <input className='form__input' id='FILE_UPLOAD' onChange={changeRouteImage} value={routeImage} accept="image/*" type="file" name="leadImage"/>           
+
+                <p className='form__input' id='FILE_UPLOADED'>asdasd</p>           
+
             <textarea className='form__input' name="routeNote" placeholder='Add your note' onChange={changeRouteNote}/>
            {loading ? (
             <p className='relative px-9 py-6 font-sans text-white bg-black/10 border-none hover:bg-red-700 transition duration-150 active:bg-black rounded-md font-medium'>Loading...{progresspercent}</p>
@@ -179,5 +192,6 @@ function Addlead({}: Props) {
     </>
   )
 }
+
 
 export default Addlead

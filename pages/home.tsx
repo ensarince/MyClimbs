@@ -14,7 +14,7 @@ export default function Home({}: Props) {
       <div className='relative flex items-center justify-center h-screen overflow-hidden'>
       <video  autoPlay loop muted 
       className="absolute z-8 min-w-full min-h-full object-cover">
-         <source src="./images/climbs_1.mp4" type="video/mp4" />
+         <source src="./images/climbs_2.mp4" type="video/mp4" />
       </video>
       </div>
 
