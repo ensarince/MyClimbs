@@ -118,14 +118,14 @@ function Addlead({}: Props) {
         alert(error)
     }
   }
-
+/* //! needs fixing
   if(imgUrl === ""){
-   const input2:HTMLElement | null = document.getElementById("FILE_UPLOAD")
+   const input2:any = document.getElementById("FILE_UPLOAD")
    input2!.style.display = "none"
   }else{
     const input1:any = document.getElementById("FILE_UPLOADED")
     input1!.style.display = "block"
-  }
+  } */
 
   return (
     <>
@@ -179,7 +179,7 @@ function Addlead({}: Props) {
 
                 <input className='form__input' id='FILE_UPLOAD' onChange={changeRouteImage} value={routeImage} accept="image/*" type="file" name="leadImage"/>           
 
-                <p className='form__input' id='FILE_UPLOADED'>asdasd</p>           
+{/*                 <p className='form__input' id='FILE_UPLOADED'>asdasd</p>    */}        
 
             <textarea className='form__input' name="routeNote" placeholder='Add your note' onChange={changeRouteNote}/>
            {loading ? (

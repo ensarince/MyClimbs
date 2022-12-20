@@ -140,7 +140,7 @@ function EditLeads({}: Props) {
           });
           router.push(`/leads/${id}`)
         } catch (error) {
-          alert(error)
+          alert("Failure. We suck, sorry!!")
       }
     }
 

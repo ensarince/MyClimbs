@@ -23,7 +23,7 @@ function LoginScreen({}: Props) {
 
                   <div className="m-20">
                     <form action="">
-                      <button className='px-9 py-6 font-sans hover:bg-fuchsia-500 hover:border-black text-white bg-cursorColor border-none font-medium cursor-pointer' onClick={() => setSignIn(true)}>SIGN IN</button>
+                      <button className='px-9 py-6 font-sans hover:bg-fuchsia-500 hover:border-black text-white bg-cursorColor border-none font-medium cursor-pointer' onClick={() => setSignIn(true)}>GET STARTED</button>
                     </form>
                   </div>
                 </>

@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{MutableRefObject, useRef, useState} from 'react'
 import {motion} from "framer-motion"
 import Nav from './nav'
 import { SocialIcon } from 'react-social-icons';
@@ -8,14 +8,57 @@ type Props = {}
 
 export default function Home({}: Props) {
 
+  const [paused, setPaused] = useState(false)
+  const videoRef: any = useRef(null)
+
+  //!control video play event
+  const handlePlayVideo = () => {
+    videoRef.current.play();
+    setPaused(!paused)
+  }
+
+  const handlePauseVideo = () => {
+    videoRef.current.pause();
+    setPaused(!paused)
+  }
+
+
   return (
     <>
       <Nav />
       <div className='relative flex items-center justify-center h-screen overflow-hidden'>
-      <video  autoPlay loop muted 
-      className="absolute z-8 min-w-full min-h-full object-cover">
+      <video 
+        autoPlay
+        loop 
+        muted 
+        id='video'
+        ref={videoRef}
+        className="absolute z-8 min-w-full min-h-full object-cover">
          <source src="./images/climbs_2.mp4" type="video/mp4" />
       </video>
+          {paused?
+              (
+          <button onClick={handlePlayVideo} className='xl:px-14 lg:px-14 md:px-12 sm:x-10 xs:px-10 z-10 py-6 border border-darkGray2/20 rounded-full 
+                    uppercase text-sm tracking-widest hover:bg-darkGray/50
+                    text-white transition-all'>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" 
+                      className="bi bi-play" viewBox="0 0 16 16"> 
+                      <path d="M10.804 8 5 4.633v6.734L10.804 8zm.792-.696a.802.802 0 0 1 0 1.392l-6.363 3.692C4.713 12.69 4 12.345 4 11.692V4.308c0-.653.713-.998 1.233-.696l6.363 3.692z"/> 
+                    </svg>
+          </button>
+              ):
+              (
+          <button onClick={handlePauseVideo} className='xl:px-14 lg:px-14 md:px-12 sm:x-10 xs:px-10 z-10 py-6 border border-darkGray2/20 rounded-full 
+                    uppercase text-sm tracking-widest hover:bg-darkGray/50
+                    text-white transition-all'>
+                      <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" 
+                       className="bi bi-play" viewBox="0 0 16 16"> 
+                       <path d="M6 3.5a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5zm4 0a.5.5 0 0 1 .5.5v8a.5.5 0 0 1-1 0V4a.5.5 0 0 1 .5-.5z"/>
+                      </svg>
+          </button>
+              )
+          }
+          
       </div>
 
       <footer className='bg-darkGray2 z-10 py-4 h-24'>
