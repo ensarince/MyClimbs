@@ -5,7 +5,7 @@ import Nav from './nav';
 
 type Props = {}
 
-function stats({}: Props) {
+function Stats({}: Props) {
 
   
   const router = useRouter();
@@ -42,4 +42,4 @@ function stats({}: Props) {
   )
 }
 
-export default stats
+export default Stats
