@@ -35,7 +35,6 @@ export default function Home() {
     return unsubscribe;
   }, [dispatch])
 
-
   
   return (
     <div className='scrollbar scrollbar-thumb-darkGray2/50 scrollbar-gray-300 overflow-y-scroll h-screen'>

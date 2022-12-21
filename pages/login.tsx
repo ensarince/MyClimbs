@@ -1,20 +1,14 @@
-import React,{useRef} from 'react'
+import React,{useRef, useState} from 'react'
 import { auth, db } from '../firebase'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import PopupTemplate from "../components/Popup"
 
-import Popup from 'reactjs-popup';
-import 'reactjs-popup/dist/index.css';
-
-const PopupExample = () => (
-  <Popup trigger={<button> Trigger</button>} position="right center">
-    <div>Popup content here !!</div>
-  </Popup>
-);
 
 type Props = {}
 
 function SignUpScreen({}: Props) {
+  const [error, setError] = useState(false)
   const emailRef = useRef<any>(null);
   const passwordRef = useRef<any>(null);
   const passwordConfirmRef = useRef()
@@ -28,12 +22,12 @@ function SignUpScreen({}: Props) {
     ).then((authUser) => {
       router.push('/')
     })
-    .catch((error) => /* alert(error.message) */
-      alert("Büyük başarısızlıklar sözkonusu!")
+    .catch((error) => 
+      setError(true)
     )
   }
   return (
-    
+    <>
     <form className='flex flex-col justify-center items-center'>
             <input className='outline-none bg-slate-200 rounded-sm border-b px-14 py-5 border-yt-gray
                 text-gray-400 transition-all font-semibold placeholder-gray-500 focus:border-darkGray2
@@ -52,8 +46,12 @@ function SignUpScreen({}: Props) {
                 <span className='hover:underline hover:text-white cursor-pointer text-white font-semibold'>Forgot Password?</span>
               </Link>
             </h3> 
+                {error ?
+                    <PopupTemplate text={"Login Error. Please check your email format"} />
+                  : null
+                }
       </form>
-
+      </>
   )
 }
 

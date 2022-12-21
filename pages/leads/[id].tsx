@@ -4,9 +4,10 @@ import Nav from '../nav'
 import { db } from '../../firebase'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../../features/userSlice'
-import { SocialIcon } from 'react-social-icons'
 import { motion } from 'framer-motion'
 import Link from 'next/link'
+import ConfirmDialog from "../../components/ConfirmDialog"
+import PopupTemplate from '../../components/Popup'
 
 
 type Props = {}
@@ -17,7 +18,10 @@ function Leads({}: Props) {
     const user = useSelector(selectUser)
     const [leadData, setLeadData] = useState<any>([])
     const [loading, setLoading] = useState(false)
-    
+    //popup handling
+    const [error, setError] = useState(false)
+    const [deleteConfirmation, setDeleteConfirmation] = useState(false)
+    const [shouldDelete, setShouldDelete] = useState(false)
     
   let uid: string | any = null;
   if (typeof window !== "undefined") {
@@ -51,7 +55,7 @@ function Leads({}: Props) {
 
       const handleDelete = (e: { preventDefault: () => void }) =>{
         e.preventDefault();
-        try {
+/*         try {
           var shouldDelete = confirm("Are you you sure?")
           if (shouldDelete) {
             db
@@ -67,7 +71,24 @@ function Leads({}: Props) {
           }
         } catch (error) {
           alert(error)
-      }
+      } */
+      setDeleteConfirmation(true)
+      try {
+         if (shouldDelete) {
+          db
+          .collection("users")
+          .doc(uid)
+          .collection("leads")
+          .doc(id)
+          .delete()
+          .then(()=>{alert("successfully deleted! ")})
+          router.push('/leads')
+        }else {
+
+        } 
+      } catch (error) {
+        setError(true)
+    }
     }
 
   return (
@@ -99,7 +120,7 @@ function Leads({}: Props) {
           transition={{
             duration: 1,
           }}
-            className='flex z-10 relative w-650 object-cover'
+          className='flex z-10 relative w-650 object-cover'
             src={leadData?.route_image} alt="" />
 
           <div className='bg-backgroundOpacity flex flex-col xl:mt-0 lg:mt-0 md:mt-0 sm:mt-0 xs:mt-10'>
@@ -111,6 +132,15 @@ function Leads({}: Props) {
             <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
             <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>{leadData?.route_notes}</p>
             
+            {deleteConfirmation ? 
+              <ConfirmDialog shouldDelete={shouldDelete} text={"Are you sure?"} />
+              : null
+            }
+            {error ? 
+              <PopupTemplate text={"Error while deleting post. But who's fault is that?"} />
+              : null
+            }
+
             <div className='flex justify-start items-start my-10'>
                 <button className='px-6 py-2 border border-coolOrange/20 rounded-full 
                     uppercase text-sm tracking-widest

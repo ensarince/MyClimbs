@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
 import { auth, db, storage } from '../firebase'
 import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import PopupTemplate from "../components/Popup"
 import Nav from './nav'
 
 type Props = {}
@@ -26,7 +27,7 @@ function Addlead({}: Props) {
   const [progresspercent, setProgresspercent] = useState(0);
   const [loading, setLoading] = useState(false)
   const [imgUrl, setImgUrl] = useState("");
-
+  const [error, setError] = useState(false)
 
         //!get local storage
       let uid: string | null = null;
@@ -83,7 +84,7 @@ function Addlead({}: Props) {
             setProgresspercent(progress);
           },
           (error) => {
-            alert(error);
+            setError(true);
           },
            () => {
               getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -115,7 +116,7 @@ function Addlead({}: Props) {
         });
         router.push('/leads')
       } catch (error) {
-        alert(error)
+        setError(true);
     }
   }
 /* //! needs fixing
@@ -187,6 +188,10 @@ function Addlead({}: Props) {
            ):
            <button onClick={addLeads} className='relative px-9 py-6 font-sans text-white bg-black/10 border-none hover:bg-red-500 transition duration-150 active:bg-black rounded-md font-medium cursor-pointer' type='submit'>Submit</button>
            }
+                           {error ?
+                    <PopupTemplate text={"Error. It might be our fault, or not!"} />
+                  : null
+                }
         </form>
     </div>
     </>

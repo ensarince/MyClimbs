@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { selectUser } from '../features/userSlice'
 import { useSelector } from 'react-redux'
+import PopupTemplate from "../components/Popup"
+
 type Props = {}
 
 function ForgotPassword({}: Props) {
@@ -12,6 +14,7 @@ function ForgotPassword({}: Props) {
     const [loading, setLoading] = useState(false)
     const router = useRouter();
     const user = useSelector(selectUser)
+    const [error, setError] = useState(false)
 
     //!get local storage
     let uid: string | null = null;
@@ -33,7 +36,7 @@ function ForgotPassword({}: Props) {
             await auth.sendPasswordResetEmail(emailRef?.current.value)
             alert("Check your inbox please.")
         } catch (error) {
-            alert(error)
+            setError(true)
         }
         setLoading(false)
     }
@@ -51,6 +54,10 @@ function ForgotPassword({}: Props) {
                     <Link href={!user ? '/' : '/forgotPassword'}>
                         <button className='text-xl hover:underline cursor-pointer mt-5 text-white'>Login</button>
                     </Link>
+                {error ?
+                    <PopupTemplate text={"Error. Please check you email format!"} />
+                  : null
+                }
                 </form>
         </div>
     </div>

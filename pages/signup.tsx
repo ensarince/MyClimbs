@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
+import PopupTemplate from '../components/Popup'
+
 type Props = {}
 
 function Register({}: Props) {
@@ -13,7 +15,7 @@ function Register({}: Props) {
     const router = useRouter();
     const [loading, setloading] = useState(false)
     const user = useSelector(selectUser)
-    
+    const [error, setError] = useState(false)    
     
     let uid: string | null = null;
     if (typeof window !== "undefined") {
@@ -32,19 +34,21 @@ function Register({}: Props) {
     e.preventDefault();
 
     if(passwordRef.current.value !== passwordConfirmRef.current.value){
-      return alert('Passwords do not match')
+      setError(true)
     }
 
     setloading(true)
-    await auth.createUserWithEmailAndPassword(
-      emailRef?.current.value,
-      passwordRef?.current.value,
-    ).catch(error => (
-      alert(error.message)
-    ));
-    setloading(false)
-    router.push('/')
-  }
+    try {
+      await auth.createUserWithEmailAndPassword(
+        emailRef?.current.value,
+        passwordRef?.current.value,
+      )
+      setloading(false)
+      router.push('/')
+    } catch (error) {
+      setError(true) 
+    }
+  } 
 
   return (
 
@@ -72,6 +76,10 @@ function Register({}: Props) {
                     <Link href={'/'}>
                         <button className='text-xl hover:underline cursor-pointer mt-3 text-white'>Cancel</button>
                     </Link>
+                    {error ?
+                      <PopupTemplate text={"Signup Error. Please check you email and passwords!"} />
+                      : null
+                    }
                 </form>
             </div>
 
