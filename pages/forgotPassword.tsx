@@ -14,7 +14,9 @@ function ForgotPassword({}: Props) {
     const [loading, setLoading] = useState(false)
     const router = useRouter();
     const user = useSelector(selectUser)
+    //popup handling
     const [error, setError] = useState(false)
+    const [errorType, setErrorType] = useState("")
 
     //!get local storage
     let uid: string | null = null;
@@ -34,8 +36,10 @@ function ForgotPassword({}: Props) {
         try {
             setLoading(true)
             await auth.sendPasswordResetEmail(emailRef?.current.value)
-            alert("Check your inbox please.")
+            setErrorType("mail")
+            setError(true)
         } catch (error) {
+            setErrorType("error")
             setError(true)
         }
         setLoading(false)
@@ -54,10 +58,12 @@ function ForgotPassword({}: Props) {
                     <Link href={!user ? '/' : '/forgotPassword'}>
                         <button className='text-xl hover:underline cursor-pointer mt-5 text-white'>Login</button>
                     </Link>
-                {error ?
-                    <PopupTemplate text={"Error. Please check you email format!"} />
-                  : null
-                }
+                    {(errorType == "mail") && (error) &&
+                        <PopupTemplate text={"Confirmation sended to your mailbox, please check!"} />
+                    }
+                    {(errorType == "error") && (error) &&
+                        <PopupTemplate text={"Please check your email!"} />
+                    }
                 </form>
         </div>
     </div>

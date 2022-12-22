@@ -9,6 +9,7 @@ import Nav from '../../nav'
 import { auth, db, storage } from '../../../firebase'
 import { selectUser, userSlice } from '../../../features/userSlice'
 import Leads from '../[id]'
+import PopupTemplate from '../../../components/Popup'
 
 
 type Props = {}
@@ -33,6 +34,10 @@ function EditLeads({}: Props) {
     const [progresspercent, setProgresspercent] = useState(0);
     const [imgUrl, setImgUrl] = useState("");
       
+    //popup handling
+    const [error, setError] = useState(false)
+    const [errorType, setErrorType] = useState("")
+
   let uid: string | any = null;
   if (typeof window !== "undefined") {
      uid = window.localStorage.getItem("user")
@@ -107,7 +112,8 @@ function EditLeads({}: Props) {
           setProgresspercent(progress);
         },
         (error) => {
-          alert(error);
+          setError(true)
+          setErrorType("imageUploadError")
         },
          () => {
             getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -140,7 +146,8 @@ function EditLeads({}: Props) {
           });
           router.push(`/leads/${id}`)
         } catch (error) {
-          alert("Failure. We suck, sorry!!")
+          setError(true)
+          setErrorType("editError")
       }
     }
 
@@ -161,9 +168,17 @@ function EditLeads({}: Props) {
         <div className='grid xl:grid-cols-2 lg:grid-cols-2 md:grid-cols-2 sm:grid-cols-2 xs:grid-cols-1 xl:gap-10 lg:gap-10 md:gap-5 sm:gap-5 h-fit min-h-screen justify-center items-center text-gray-100 p-20 bg-backgroundOpacity2'>
 
         <div className='group relative flex cursor-pointer items-center justify-center opacity-80 xl:mb-0 lg:mb-0 md:mb-0 sm:mb-0 xs:mb-5'>
+          
           <img id='imageValue' className='overflow-hidden flex object-cover relative w-650 ilter group-hover:grayscale transition duration-300 ease-in-out' 
-            /*//! to be corrected */
-            src={imgUrl || "https://firebasestorage.googleapis.com/v0/b/my-climbs.appspot.com/o/images%2FeeULazRUwkhY58GuErDCisytCdh2%2FCH9ZtRQWgAA_tz_.jpg?alt=media&token=433d8653-6735-4771-8509-cbf984a8dfb"} alt="" />
+            src={imgUrl || "https://preview.redd.it/zap5g17zlxe91.png?width=640&crop=smart&auto=webp&s=1ca53925b0ade2b2364a02742c66260c52aea4f7"} alt="" />
+            
+            {(errorType == "imageUploadError") && (error) &&
+              <PopupTemplate text={"There was a problem when uploading, try smallar image maybe!"} />
+            }
+            {(errorType == "editError") && (error) &&
+               <PopupTemplate text={"Oh no! We suck sorry!"} />
+            
+            }
           <div className='absolute opacity-0 group-hover:opacity-80 transition duration-300 ease-in-out group-hover:bg-white h-20 rounded-full z-0 '>
             <div className='flex items-center justify-center h-full'>
               <input className='outline-none bg-slate-100 opacity-100 rounded-sm border-b px-6 py-5 border-yt-gray

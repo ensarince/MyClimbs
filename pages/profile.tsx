@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Nav from './nav'
 import { auth } from '../firebase'
 import { useSelector } from 'react-redux'
 import { useRouter } from 'next/router'
 import { selectUser } from '../features/userSlice'
 import Link from 'next/link'
+import PopupTemplate from '../components/Popup'
 
 type Props = {}
 
 export default function ProfileScreen({}: Props) {
+
+  //popup handling
+  const [error, setError] = useState(false)
 
   //!get local storage
   let uid: string | null = null;
@@ -33,7 +37,7 @@ export default function ProfileScreen({}: Props) {
       router.push('/')
       window.localStorage.setItem("user", "")
     } catch (error) {
-      alert(error)
+      setError(true)
     }
   }
 
@@ -55,6 +59,10 @@ export default function ProfileScreen({}: Props) {
               <Link href={"/stats"}>
                 <button className='text-xl hover:underline cursor-pointer mt-5'>Stats</button>
               </Link>
+              {error ?
+                      <PopupTemplate text={"Successfull!"} />
+                : null
+              }
 
             </div>
           </div>

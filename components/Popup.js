@@ -9,7 +9,7 @@ const PopupTemplate = ({text}) => {
     <div className="absolute flex md:flex-col justify-center items-center">
         {showModal ? 
         (
-        <div className="mt-10 flex justify-center items-center flex-col w-1/2 rounded-lg shadow-2xl h-auto xl:px-4 lg:px-4 md:px-4 sm:px-2 xs:px-2 xl:py-8 lg:py-8 md:py-6 sm:py-6 xs:py-4 bg-white/90">
+        <div className="mt-10 flex justify-center items-center flex-col w-fit rounded-lg shadow-2xl h-auto xl:px-4 lg:px-4 md:px-4 sm:px-2 xs:px-2 xl:py-8 lg:py-8 md:py-6 sm:py-6 xs:py-4 bg-white/90">
           <img src="./images/error_logo.jpg" width={50} height={50} objectFit="contain" />
           <h2 className="xl:text-xl lg:text-xl md:text-xl sm:text:base xs:text-base mt-2 text-red-500 font-semibold text-center mx-4">
             {text ? text : 'Default Text'}</h2>

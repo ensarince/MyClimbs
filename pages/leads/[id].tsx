@@ -40,7 +40,7 @@ function Leads({}: Props) {
   
         }
       } catch (error) {
-        alert(error)
+        setError(true)
     }
 };
   

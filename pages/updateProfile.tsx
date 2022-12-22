@@ -4,6 +4,8 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { selectUser } from '../features/userSlice'
 import { useSelector } from 'react-redux'
+import PopupTemplate from '../components/Popup'
+
 
 type Props = {}
 
@@ -15,6 +17,10 @@ function UpdateProfile({}: Props) {
     const router = useRouter();
     const [loading, setloading] = useState(false)
     const user = useSelector(selectUser)
+
+    //popup handling
+    const [error, setError] = useState(false)
+    const [errorType, setErrorType] = useState("")
 
     let uid: string | null = null;
     if (typeof window !== "undefined") {
@@ -28,14 +34,14 @@ function UpdateProfile({}: Props) {
       : router.push("/updateProfile");
       }, []);
 
-    
-
     const updateProfile = async(e: { preventDefault: () => void }) => {
     //prevent refresh of the page when button clicked
     e.preventDefault();
 
     if(passwordRef.current.value !== passwordConfirmRef.current.value){
-      return alert('Passwords do not match')
+      setErrorType("passwordError")
+      setError(true)
+      return
     }
     try {
       setloading(true)
@@ -43,13 +49,13 @@ function UpdateProfile({}: Props) {
         emailRef?.current.value),
       await auth.currentUser?.updatePassword(
         passwordRef?.current.value)
-        .catch(error => (
-        alert(error.message)
-      ));
-      router.push('/')     
-    } catch (error) {
-      alert(error)
-    }
+        } catch (error) {
+          setErrorType("mailError")
+          setError(true)
+        }
+        setErrorType("success"),
+        setError(true)
+        router.push('/')     
     setloading(false)
 
     }
@@ -78,6 +84,15 @@ function UpdateProfile({}: Props) {
                     <Link href={!user ? '/updateProfile' : '/'}>
                         <button className='text-xl hover:underline cursor-pointer mt-3 text-white'>Cancel</button>
                     </Link>
+                    {(errorType == "passwordError") && (error) &&
+                      <PopupTemplate text={"Please check you passwords!"} />
+                    }
+                    {(errorType == "error") && (error) &&
+                      <PopupTemplate text={"Please check your email!"} />
+                    }
+                      {(errorType == "success") && (error) &&
+                      <PopupTemplate text={"Successfull!"} />
+                    }
                 </form>
             </div>
 
