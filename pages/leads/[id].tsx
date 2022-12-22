@@ -111,7 +111,7 @@ function Leads({}: Props) {
             duration: 1,
           }}
           className='flex z-10 relative w-650 object-cover'
-            src={leadData?.route_image} alt="" />
+            src={leadData?.route_image || "https://preview.redd.it/zap5g17zlxe91.png?width=640&crop=smart&auto=webp&s=1ca53925b0ade2b2364a02742c66260c52aea4f7"} alt="" />
 
           <div className='bg-backgroundOpacity flex flex-col xl:mt-0 lg:mt-0 md:mt-0 sm:mt-0 xs:mt-10'>
             <h1 className='text-4xl text-gray-100 hover:underline mb-5 uppercase bg-backgroundOpacity'>{leadData?.route_name}</h1>

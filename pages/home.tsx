@@ -73,7 +73,7 @@ export default function Home({}: Props) {
                 </svg>
             </a>
           </div>
-            <a className="text-whitehite">© 2022 - MyClimbs</a>
+            <a className="text-whitehite">©2022 - MyClimbs</a>
         </div>
       </footer>
     </>
