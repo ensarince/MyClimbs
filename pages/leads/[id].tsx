@@ -22,7 +22,29 @@ function Leads({}: Props) {
     const [error, setError] = useState(false)
     const [deleteConfirmation, setDeleteConfirmation] = useState(false)
     const [shouldDelete, setShouldDelete] = useState(false)
-    
+
+    // 👇️ take parameter passed from Child component and apply delete function
+     function handleClick(){
+       setShouldDelete(true)
+        try{
+        if (shouldDelete) {
+          db
+          .collection("users")
+          .doc(uid)
+          .collection("leads")
+          .doc(id)
+          .delete()
+          .then(()=>{alert("successfully deleted! ")})
+          router.push('/leads')
+        }else {
+  
+        }
+      } catch (error) {
+        alert(error)
+    }
+};
+  
+
   let uid: string | any = null;
   if (typeof window !== "undefined") {
      uid = window.localStorage.getItem("user")
@@ -53,43 +75,11 @@ function Leads({}: Props) {
         })
     }, [])   
 
-      const handleDelete = (e: { preventDefault: () => void }) =>{
+
+      function handleDelete(e: { preventDefault: () => void }){
         e.preventDefault();
-/*         try {
-          var shouldDelete = confirm("Are you you sure?")
-          if (shouldDelete) {
-            db
-            .collection("users")
-            .doc(uid)
-            .collection("leads")
-            .doc(id)
-            .delete()
-            .then(()=>{alert("successfully deleted! ")})
-            router.push('/leads')
-          }else {
-
-          }
-        } catch (error) {
-          alert(error)
-      } */
-      setDeleteConfirmation(true)
-      try {
-         if (shouldDelete) {
-          db
-          .collection("users")
-          .doc(uid)
-          .collection("leads")
-          .doc(id)
-          .delete()
-          .then(()=>{alert("successfully deleted! ")})
-          router.push('/leads')
-        }else {
-
-        } 
-      } catch (error) {
-        setError(true)
-    }
-    }
+        setDeleteConfirmation(true)
+      }
 
   return (
     <>
@@ -133,7 +123,7 @@ function Leads({}: Props) {
             <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>{leadData?.route_notes}</p>
             
             {deleteConfirmation ? 
-              <ConfirmDialog shouldDelete={shouldDelete} text={"Are you sure?"} />
+              <ConfirmDialog handleClick = {handleClick} text={"Are you sure? (Click double to delete)"} />
               : null
             }
             {error ? 

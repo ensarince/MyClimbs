@@ -1,14 +1,7 @@
 import { useEffect, useState } from 'react'
-import { AiFillFire } from "react-icons/ai";
-import Image from "next/image";
 
-const ConfirmDialog = ({text, shouldDelete}) => {
+const ConfirmDialog = ({text, handleClick  }) => {
   const [showModal, setShowModal] = useState(true)
-
-  const handleDelete = () =>{
-    shouldDelete = true;
-    setShowModal(false)
-  }
 
   return (
     //!fix it
@@ -22,7 +15,7 @@ const ConfirmDialog = ({text, shouldDelete}) => {
             <div>
             <button
               className=" w-auto px-6 my-5 border border-red-100 h-10 hover:bg-red-700 hover:text-white   rounded-md text-red-600  hover:shadow-lg font-semibold"
-              onClick={handleDelete}>
+              onClick={() => handleClick()}>
               Delete
             </button>
 
