@@ -1,11 +1,14 @@
 import { useRouter } from 'next/router'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { selectUser } from '../features/userSlice'
 import { auth, db, storage } from '../firebase'
-import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { getStorage, ref, uploadBytes, getDownloadURL, uploadBytesResumable, uploadString } from "firebase/storage";
+import { addDoc, collection, serverTimestamp, doc, updateDoc } from 'firebase/firestore'
 import PopupTemplate from "../components/Popup"
 import Nav from './nav'
+import { CameraIcon, XIcon } from '@heroicons/react/outline'
+
 
 type Props = {}
 
@@ -13,7 +16,9 @@ function Addlead({}: Props) {
 
   const user = useSelector(selectUser)
   const router = useRouter()
-  let file: any | Blob | ArrayBuffer = [];
+
+  const filePickerRef: any = useRef(null)
+  const [selectedFile, setSelectedFile]: any = useState(null)
 
   const [routeName, setRouteName] = useState("")
   const [routeGrade, setRouteGrade] = useState("")
@@ -70,63 +75,53 @@ function Addlead({}: Props) {
       
       const changeRouteImage = (event: { target: { files: any | Blob | ArrayBuffer } }) => {
 
-        setLoading(true)
-        file = event.target.files[0]
-
-        const storageRef = ref(storage, `/images/${user?.uid}/${file.name}`);
-        const  uploadTask = uploadBytesResumable(storageRef, file);
-
-        setLoading(true)
-         uploadTask.on("state_changed",
-          (snapshot) => {
-            const progress =
-              Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
-            setProgresspercent(progress);
-          },
-          (error) => {
-            setError(true);
-          },
-           () => {
-              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
-                setImgUrl(downloadURL)
-                setLoading(false)
-            });
-          }
-        );    
+        const reader = new FileReader();
+        if(event.target.files[0]){
+            reader.readAsDataURL(event.target.files[0])
+        }
+        reader.onload = (readerEvent: any) => {
+            setSelectedFile(readerEvent.target.result)
+        }
       }
 
-  const addLeads = (e: { preventDefault: () => void }) => {  
-    //!
-    e.preventDefault();
-      try {
-        db
-        .collection("users")
-        .doc(user?.uid)
-        .collection("leads")
-        .add({
-          route_name: routeName,
-          route_grade: routeGrade,
-          route_country: routeCountry,
-          route_crag: routeCrag,
-          route_sector: routeSector,
-          route_climb_type: routeClimbType,
-          route_date: routeDate,
-          route_image: imgUrl,
-          route_notes: routeNote
-        });
-        router.push('/leads')
-      } catch (error) {
-        setError(true);
-    }
+  const addLeads = async (e: { preventDefault: () => void }) => {  
+
+    if(loading) return
+
+    setLoading(true)
+
+    //1. create a post and add to firestore 'posts' collection
+    //2. get the post id 
+    //3. upload the image to storage
+    //4. get the imgUrl and upload the final post
+
+    const docRef = await addDoc(collection(db, 'users', user?.uid, 'leads'), {
+      route_name: routeName,
+      route_grade: routeGrade,
+      route_country: routeCountry,
+      route_crag: routeCrag,
+      route_sector: routeSector,
+      route_climb_type: routeClimbType,
+      route_date: routeDate,
+      route_image: imgUrl,
+      route_notes: routeNote
+    })
+
+    console.log("New doc added with ID -->  ", docRef.id)
+
+    const imageRef = ref(storage, `leads/${docRef.id}/image`);
+    await uploadString(imageRef, selectedFile, "data_url")
+    .then(async snapshot => {
+        const downloadURL = await getDownloadURL(imageRef);
+        await updateDoc(doc(db, 'users', user?.uid, 'leads', docRef.id), {
+          route_image: downloadURL
+        })
+    });
+
+    setLoading(false)
+    setSelectedFile(null)
+    router.push('/leads')
   }
-/* //! needs fixing
-  if(imgUrl === ""){
-   const input2:any = document.getElementById("FILE_UPLOAD")
-   input2!.style.display = "none"
-  }else{
-    const input1:any = document.getElementById("FILE_UPLOADED")
-    input1!.style.display = "block"
-  } */
 
   return (
     <>
@@ -176,18 +171,51 @@ function Addlead({}: Props) {
                 <option className='form__input' value="onsight">Onsight</option>
             </select>
             <input className='form__input' onChange={changeRouteDate} value={routeDate} type="date" />
-            
-
-                <input className='form__input' id='FILE_UPLOAD' onChange={changeRouteImage} value={routeImage} accept="image/*" type="file" name="leadImage"/>           
-
-{/*                 <p className='form__input' id='FILE_UPLOADED'>asdasd</p>    */}        
 
             <textarea className='form__input' name="routeNote" placeholder='Add your note' onChange={changeRouteNote}/>
-           {loading ? (
-            <p className='relative px-9 py-6 font-sans text-white bg-black/10 border-none hover:bg-red-700 transition duration-150 active:bg-black rounded-md font-medium'>Loading...{progresspercent}</p>
-           ):
-           <button onClick={addLeads} className='relative px-9 py-6 font-sans text-white bg-black/10 border-none hover:bg-red-500 transition duration-150 active:bg-black rounded-md font-medium cursor-pointer' type='submit'>Submit</button>
-           }
+            
+            <div className='form__input'>
+
+                        <div>
+                            {selectedFile ? (
+                                    <div className='relative'>
+                                      <XIcon onClick={() => setSelectedFile(null)} className='h-7 z-10 cursor-pointer opacity-70 hover:opacity-100 hover:scale-125 transition-all duration-150 ease-out' />
+                                      <img src={selectedFile} onClick={() => setSelectedFile} alt="" />
+                                    </div>
+                                ) : (
+
+                            <div onClick={() => filePickerRef.current.click()}
+                                className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-red-100 cursor-pointer">
+                                <CameraIcon 
+                                    className='h-6 w-6 text-red-600'
+                                    aria-hidden="true"/>
+                            </div>
+                                )
+                            }
+                            <div>
+                                <div className='mt-3 text-center sm:mt-5'>
+                                    <div>
+                                        <input type="file"
+                                            ref={filePickerRef}
+                                            hidden 
+                                            onChange={changeRouteImage}/>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            <div className='mt-5 sm:mt-6'>
+    
+                            </div>
+                        </div>
+                </div>
+
+           <button disabled={!selectedFile} onClick={addLeads} type='button' 
+           className='inline-flex justify-center w-1/2 rounded-md border border-transparent shadow-sm
+                   px-4 py-3 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none
+                   focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:text-sm disabled:bg-gray-300
+                   disabled:cursor-not-allowed hover:disabled:bg-gray-300'>
+           {loading ? "Uploading..." : "Upload Post"}         
+          </button>
                            {error ?
                     <PopupTemplate text={"Error. It might be our fault, or not!"} />
                   : null

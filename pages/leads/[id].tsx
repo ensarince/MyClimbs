@@ -120,7 +120,7 @@ function Leads({}: Props) {
             <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_country}</p>
             <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_crag}</p>
             <p className='bg-backgroundOpacity mb-3 text-2xl'>{leadData?.route_date}</p>
-            <p className='bg-backgroundOpacity mb-3 text-2xl mt-2'>{leadData?.route_notes}</p>
+            <p className='bg-backgroundOpacity mb-3 text-2xl mt-2 break-words'>{leadData?.route_notes}</p>
             
             {deleteConfirmation ? 
               <ConfirmDialog handleClick = {handleClick} text={"Are you sure? (Click double to delete)"} />
